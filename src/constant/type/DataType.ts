@@ -5,4 +5,6 @@ export interface UserType {
   status?: string;
   forumown?: string[];
   alias?: string;
+  uuid: string;
+  created_at?: Date;
 }

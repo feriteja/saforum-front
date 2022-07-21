@@ -4,7 +4,7 @@ import { Loading, Navbar, SnackBar } from "./components";
 
 import { ThemeProvider } from "./context/ThemeContext";
 import { SignIn, SignUp } from "./pages/auth";
-import { HomePage, ProfilePage } from "./pages/main";
+import { HomePage, PostingPage, ProfilePage } from "./pages/main";
 import { UserProvider } from "./context/UserContext";
 import { NotFound } from "./pages/warn";
 import { SystemProvider } from "./context/SystemContext";
@@ -16,10 +16,11 @@ function App() {
       <CookiesProvider>
         <UserProvider>
           <SystemProvider>
-            <div className="min-h-screen ">
-              <Navbar />
+            <Navbar />
+            <div className="min-h-screen mx-auto bg-slate-100   max-w-5xl  ">
               <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/posting" element={<PostingPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />

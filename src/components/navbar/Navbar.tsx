@@ -15,6 +15,7 @@ const Navbar = () => {
   const { user } = UserState();
 
   const handleNav = () => {
+    console.log(user);
     setIsOpen((prev) => !prev);
   };
 
@@ -30,9 +31,13 @@ const Navbar = () => {
     }
   };
 
+  const forceLogout = () => {
+    removeCookie("authCookie");
+  };
+
   return (
     <>
-      <nav className="fixed  top-0  flex items-center justify-between h-16 shadow  w-full px-2 sm:px-4 md:px-6 ">
+      <nav className=" flex items-center justify-between h-16 shadow  w-full px-2 sm:px-4 md:px-6 ">
         <NavLink to={"/"}>
           <h1 className="font-bold text-2xl z-40">SaForum</h1>
         </NavLink>
@@ -66,7 +71,7 @@ const Navbar = () => {
                 }
                 to={"/signIn"}
               >
-                Masuk
+                SignIn
               </NavLink>
             </li>
           ) : (
@@ -88,6 +93,9 @@ const Navbar = () => {
           )}
         </ul>
 
+        {/* <button className="" onClick={forceLogout}>
+          forcelogout
+        </button> */}
         <button className="sm:hidden" onClick={handleNav}>
           {isOpen ? <MdClose size={28} /> : <MdMenu size={28} />}
         </button>
@@ -104,8 +112,8 @@ const Navbar = () => {
       <div
         className={
           isOpen
-            ? "fixed sm:hidden right-0 top-16 bg-secondary w-[75%] h-full px-4 py-4 z-50 opacity-100 ease-in duration-300 "
-            : "fixed sm:hidden right-[-100%] top-16   bg-secondary  w-[75%] h-full opacity-0 ease-in duration-300 "
+            ? "fixed   right-0 top-16 bg-secondary w-[75%] h-full px-4 py-4 z-50 opacity-100 ease-in duration-300 "
+            : "fixed  right-[-100%] top-16   bg-secondary  w-[75%] h-full opacity-0 ease-in duration-300 "
         }
       >
         <ul className="font-bold flex flex-col justify-evenly h-40">
@@ -117,9 +125,30 @@ const Navbar = () => {
           >
             <li onClick={handleNav}>Homepage</li>
           </NavLink>
-          <li>Latest</li>
-          <li>All Series</li>
-          <li>Genres</li>
+          {!user ? (
+            <NavLink
+              to={"/signin"}
+              className={({ isActive }) =>
+                isActive ? "text-accent" : "text-primary"
+              }
+            >
+              <li onClick={handleNav}>SignIn</li>
+            </NavLink>
+          ) : (
+            <>
+              <NavLink
+                to={"/profile"}
+                className={({ isActive }) =>
+                  isActive ? "text-accent" : "text-primary"
+                }
+              >
+                <li onClick={handleNav}>Profile</li>
+              </NavLink>
+              <li onClick={handleNav}>
+                <button onClick={onLogout}>Logout</button>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </>

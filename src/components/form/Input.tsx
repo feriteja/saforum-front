@@ -36,6 +36,7 @@ const Input: React.FC<props> = ({
           type={showPass ? "text" : "password"}
           id={inputId}
           autoComplete="current-password"
+          required
           placeholder={placeHolder}
         />
         {isPassword &&
