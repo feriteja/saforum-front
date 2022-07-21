@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { useJwt } from "react-jwt";
 import { UserType } from "../constant/type/DataType";
 
 export interface userStateContextProps {
@@ -9,10 +11,21 @@ const UserContext = createContext<Partial<userStateContextProps>>({});
 
 const UserProvider: React.FC<any> = ({ children }) => {
   const [user, setUser] = useState<UserType | null>(null);
+  const [cookies, setCookies] = useCookies();
+  const { decodedToken, isExpired } = useJwt(
+    cookies?.authCookie?.access_token || "sads"
+  );
 
   useEffect(() => {
-    return () => {};
-  }, [user]);
+    if (!isExpired) {
+      setUser(decodedToken as UserType);
+    } else {
+      setUser(null);
+    }
+    return () => {
+      setUser(null);
+    };
+  }, [cookies.authCookie, decodedToken, isExpired]);
 
   return (
     <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>

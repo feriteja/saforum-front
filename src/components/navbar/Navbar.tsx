@@ -1,19 +1,38 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import { MdClose, MdMenu } from "react-icons/md";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { systemState } from "../../context/SystemContext";
 import { UserState } from "../../context/UserContext";
+import { signOutFunc } from "../../function/handler/auth/auth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [cookies, setCookies, removeCookie] = useCookies();
+  const { showSnackbar, showLoading } = systemState();
+  const navigate = useNavigate();
+
   const { user } = UserState();
 
   const handleNav = () => {
     setIsOpen((prev) => !prev);
   };
 
+  const onLogout = async () => {
+    try {
+      await signOutFunc(cookies.authCookie.access_token);
+
+      removeCookie("authCookie");
+      showSnackbar("SignOut success");
+      navigate("/");
+    } catch (error) {
+      showSnackbar("SignOut failed");
+    }
+  };
+
   return (
     <>
-      <nav className="fixed flex items-center justify-between h-16 shadow  w-full px-2 sm:px-4 md:px-6 ">
+      <nav className="fixed  top-0  flex items-center justify-between h-16 shadow  w-full px-2 sm:px-4 md:px-6 ">
         <NavLink to={"/"}>
           <h1 className="font-bold text-2xl z-40">SaForum</h1>
         </NavLink>
@@ -38,7 +57,35 @@ const Navbar = () => {
               Category
             </NavLink>
           </li>
-          <li className="mx-2">Genres</li>
+
+          {!user ? (
+            <li className="mx-2">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "text-accent" : "text-primary"
+                }
+                to={"/signIn"}
+              >
+                Masuk
+              </NavLink>
+            </li>
+          ) : (
+            <>
+              <li className="mx-2">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-accent" : "text-primary"
+                  }
+                  to={"/profile"}
+                >
+                  Profile
+                </NavLink>
+              </li>
+              <li className="mx-2">
+                <button onClick={onLogout}>logout</button>
+              </li>
+            </>
+          )}
         </ul>
 
         <button className="sm:hidden" onClick={handleNav}>
