@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import { systemState } from "../../../context/SystemContext";
 import { addComment } from "../../../function/handler/forum/forum";
 
@@ -13,6 +14,7 @@ const Comment = ({ ...props }: props) => {
   const [cookies] = useCookies();
   const date = new Date();
   const { showSnackbar, showLoading } = systemState();
+  const navigate = useNavigate();
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -30,6 +32,8 @@ const Comment = ({ ...props }: props) => {
       });
       showLoading(false);
       showSnackbar("success");
+      setCommentText("");
+      navigate(`/forum/s/${props.forumID}`);
     } catch (error) {
       showLoading(false);
       showSnackbar("failed");
@@ -46,6 +50,7 @@ const Comment = ({ ...props }: props) => {
         </label>
         <textarea
           onChange={(text) => setCommentText(text.target.value)}
+          value={commentText}
           className="resize-none bg-primary outline-none border-2 w-full rounded-md px-3 py-1"
           name="commentArea"
           placeholder="What are your thought"

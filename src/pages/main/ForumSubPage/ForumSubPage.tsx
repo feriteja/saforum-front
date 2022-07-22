@@ -27,9 +27,9 @@ const ForumSubPage = () => {
         <div>loading </div>
       ) : (
         <div className="relative  px-3 py-6 top-5 bg-primary  shadow-lg rounded  ">
-          <div className="flex border-b-2">
+          <div className="flex border-b-2  ">
             <Vote />
-            <div className="pb-3">
+            <div className="pb-3 w-full">
               <Content
                 category={data?.category}
                 owner={data?.owner}
