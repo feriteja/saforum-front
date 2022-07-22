@@ -6,3 +6,4 @@ export { default as Loading } from "./warn/loading/Loading";
 export { default as PostCard } from "./cards/PostCard";
 export { default as ForumCard } from "./cards/ForumCard";
 export { default as SkeletonForum } from "./skeleton/SkeletonForum";
+export { default as SideBar } from "./sidebar/sidebar";

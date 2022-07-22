@@ -15,7 +15,7 @@ const ForumCard = (data: { data: ForumType }) => {
 
       <h1 className="font-semibold text-lg">{data.data.title}</h1>
 
-      <div className=" rounded-md ">
+      <div className=" line-clamp-6">
         <p>{data.data.content}</p>
       </div>
       <div className="flex items-center">

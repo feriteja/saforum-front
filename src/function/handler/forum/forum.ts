@@ -2,17 +2,40 @@ import axios from "axios";
 import { AuthTokenType, ForumType } from "../../../constant/type/DataType";
 axios.defaults.baseURL = "http://127.0.0.1:3003/api/forum";
 
+interface ResponseAllForumType {
+  message: string;
+  data: ForumType[];
+}
+interface ResponseDetilForumType {
+  message: string;
+  data: ForumType;
+}
+
 const getAllForum = async (category?: string) => {
   try {
-    const res = await axios({
+    const res = await axios.request<ResponseAllForumType>({
       method: "get",
       url: "/",
       data: {
         category,
       },
     });
-    return res;
-  } catch (error) {}
+    return res.data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getForumDetail = async (forumId?: string) => {
+  try {
+    const res = await axios.request<ResponseDetilForumType>({
+      method: "get",
+      url: `/s/${forumId}`,
+    });
+    return res.data.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const addForum = async ({
@@ -42,4 +65,4 @@ const addForum = async ({
   }
 };
 
-export { addForum, getAllForum };
+export { addForum, getAllForum, getForumDetail };

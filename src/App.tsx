@@ -15,40 +15,45 @@ import { UserProvider } from "./context/UserContext";
 import { NotFound } from "./pages/warn";
 import { SystemProvider } from "./context/SystemContext";
 import { CookiesProvider } from "react-cookie";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <ThemeProvider initialTheme="light">
-      <CookiesProvider>
-        <UserProvider>
-          <SystemProvider>
-            <Navbar />
-            <div className="min-h-screen  bg-slate-50">
-              <div className="mx-auto   max-w-5xl  ">
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/forum">
-                    <Route path=":category" element={<ForumPage />} />
-                  </Route>
-                  <Route path="forum/s/:forumID" element={<ForumSubPage />} />
-                  <Route path="/posting" element={<PostingPage />} />
-                  <Route path="/profile" element={<ProfilePage />} />
-                  <Route path="/signin" element={<SignIn />} />
-                  <Route path="/signup" element={<SignUp />} />
-                  <Route path="notFound" element={<NotFound />} />
-                  <Route
-                    path="/*"
-                    element={<Navigate to="/notFound" replace />}
-                  />
-                </Routes>
-                <Loading />
-                <SnackBar />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider initialTheme="light">
+        <CookiesProvider>
+          <UserProvider>
+            <SystemProvider>
+              <Navbar />
+              <div className=" min-h-screen  bg-slate-50">
+                <div className="mx-auto max-w-5xl  ">
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/forum">
+                      <Route path=":category" element={<ForumPage />} />
+                    </Route>
+                    <Route path="forum/s/:forumID" element={<ForumSubPage />} />
+                    <Route path="/posting" element={<PostingPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="notFound" element={<NotFound />} />
+                    <Route
+                      path="/*"
+                      element={<Navigate to="/notFound" replace />}
+                    />
+                  </Routes>
+                  <Loading />
+                  <SnackBar />
+                </div>
               </div>
-            </div>
-          </SystemProvider>
-        </UserProvider>
-      </CookiesProvider>
-    </ThemeProvider>
+            </SystemProvider>
+          </UserProvider>
+        </CookiesProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 
