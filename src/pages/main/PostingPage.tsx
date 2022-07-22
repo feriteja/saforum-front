@@ -42,7 +42,7 @@ const PostingPage = () => {
   return (
     <div className="p-2">
       <h1 className="font-semibold text-lg">Create Post</h1>
-      <div className="bg-white shadow-md w-full px-3 py-4 mt-2">
+      <div className="bg-primary shadow-md w-full px-3 py-4 mt-2">
         <form onSubmit={onSubmit} className="flex flex-col space-y-3">
           <input
             id="titlePost"
@@ -50,7 +50,7 @@ const PostingPage = () => {
             name="title"
             onChange={(e) => setTitle(e.target.value)}
             placeholder="title"
-            className="w-full outline-none border-2 rounded-md p-2"
+            className="w-full  border  border-primary rounded-md p-2 bg-primary focus:outline focus:outline-1"
           />
 
           <textarea
@@ -59,7 +59,7 @@ const PostingPage = () => {
             id="content"
             rows={7}
             placeholder="content(optional)"
-            className="resize-none outline-none w-full rounded-md border-2 p-2"
+            className="resize-none w-full rounded-md border focus:outline focus:outline-1 border-primary bg-primary p-2"
           ></textarea>
           <label
             htmlFor="countries"
@@ -71,7 +71,7 @@ const PostingPage = () => {
             id="countries"
             defaultValue={"PUBLIC"}
             onChange={(e) => setCategory(e.target.value)}
-            className="  rounded-md block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 "
+            className="  rounded-md block w-full p-2.5 bg-primary border border-primary placeholder-gray-400  "
           >
             <option aria-required disabled>
               Choose a category
@@ -85,7 +85,7 @@ const PostingPage = () => {
           <input
             type="submit"
             value="Post"
-            className="rounded-full bg-slate-300 px-3 py-1 self-end cursor-pointer"
+            className="cursor-pointer self-end mr-3 text-black  rounded-full bg-accent  px-3 py-1 font-bold"
           />
         </form>
       </div>

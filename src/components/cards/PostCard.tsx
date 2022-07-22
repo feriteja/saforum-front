@@ -12,15 +12,15 @@ const PostCard = () => {
   };
 
   return (
-    <div className="flex bg-white shadow-sm rounded-md px-2 py-4 ">
+    <div className="flex bg-primary shadow-sm rounded-md px-2 py-4 ">
       <button onClick={toProfile}>
         <img src={avatar} alt="avatar" className="w-10" />
       </button>
-      <div className="flex w-full cursor-pointer" onClick={toPostPage}>
-        <div className="flex items-center bg-slate-200 w-full p-2 mx-2 rounded-md">
+      <div className="flex w-full cursor-pointer " onClick={toPostPage}>
+        <div className="flex items-center bg-secondary w-full p-2 mx-2 rounded-md  border border-primary ">
           <p className="opacity-70">Create Post</p>
         </div>
-        <button className="bg-slate-200 px-2 rounded-md font-semibold">
+        <button className="bg-secondary px-2 rounded-md font-semibold  border border-primary">
           Post
         </button>
       </div>

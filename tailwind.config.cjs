@@ -17,7 +17,7 @@ module.exports = {
         btnText: "var(--color-bg-secondary)",
       },
       borderColor: {
-        primary: "var(--color-bg-primary)",
+        primary: "var(--color-border-primary)",
         secondary: "var(--color-bg-secondary)",
         input: "var(--color-bg-input)",
         accent: "var(--color-accent)",

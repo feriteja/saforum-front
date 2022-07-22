@@ -37,7 +37,7 @@ const signIn = () => {
   };
 
   return (
-    <div className=" min-h-screen flex flex-col  mt-24   max-w-5xl mx-auto   ">
+    <div className=" min-h-screen flex flex-col  justify-center  max-w-5xl mx-auto   ">
       <div className=" w-3/4 md:w-full max-w-2xl px-4 pt-4  pb-5  mx-auto rounded-md shadow-xl ">
         <h1 className=" text-xl font-bold text-center mb-7">Sign In</h1>
         {error && (
@@ -66,7 +66,7 @@ const signIn = () => {
           />
         </form>
         <p className="text-sm mt-2 text-right">
-          New to <b>Saforum?, </b>
+          New to <b>SaForum?, </b>
           <Link className="text-blue-400" to={"/signUp"}>
             <b> SIGN UP</b>
           </Link>{" "}

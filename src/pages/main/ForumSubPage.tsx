@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React, { SyntheticEvent, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { getForumDetail } from "../../function/handler/forum/forum";
-import { BiDownvote, BiUpvote } from "react-icons/bi";
+
 import { UserState } from "../../context/UserContext";
+import { Vote } from "../../components";
 
 const ForumSubPage = () => {
   const { forumID } = useParams();
@@ -23,12 +24,9 @@ const ForumSubPage = () => {
   }, [forumID]);
 
   return (
-    <div className="relative  px-3 py-6 top-5 bg-white  shadow-lg rounded  ">
+    <div className="relative  px-3 py-6 top-5 bg-primary  shadow-lg rounded  ">
       <div className="flex border-b-2">
-        <div className="flex flex-col items-center py-5 min-w-[50px]  space-y-3 ">
-          <BiUpvote size={25} className="cursor-pointer" />
-          <BiDownvote size={25} className="cursor-pointer" />
-        </div>
+        <Vote />
         <div className="pb-3">
           <div className="space-y-2">
             <div className="flex space-x-4 ">
@@ -48,7 +46,7 @@ const ForumSubPage = () => {
                 </strong>
               </label>
               <textarea
-                className="resize-none outline-none border-2 w-full rounded-md px-3 py-1"
+                className="resize-none bg-primary outline-none border-2 w-full rounded-md px-3 py-1"
                 name="commentArea"
                 placeholder="What are your thought"
                 id="commentArea"
@@ -57,7 +55,7 @@ const ForumSubPage = () => {
               ></textarea>
               <input
                 type="submit"
-                className="cursor-pointer self-end mr-3   rounded-full bg-slate-300 px-3 py-1 font-bold"
+                className="cursor-pointer self-end mr-3 text-black  rounded-full bg-accent  px-3 py-1 font-bold"
               />
             </form>
           </div>

@@ -8,7 +8,7 @@ const HomePage = () => {
         <PostCard />
         <ListForum />
       </div>
-      <div className="bg-green-300 min-h-screen col-span-3 ">sidebar</div>
+      <div className="bg-secondary min-h-screen col-span-3 ">sidebar</div>
     </div>
   );
 };
