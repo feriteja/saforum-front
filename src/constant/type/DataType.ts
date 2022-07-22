@@ -20,10 +20,13 @@ export interface ForumType {
   owner?: string;
   created_at?: Date;
   content?: string;
-  comment?: CommentType[];
+  comment?: number;
   view_count?: number;
   like_count?: number;
   category: string;
+}
+export interface detailForumType extends Omit<ForumType, "comment"> {
+  comment?: CommentType[];
 }
 
 export interface CommentType {

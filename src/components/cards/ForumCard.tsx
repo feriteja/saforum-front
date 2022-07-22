@@ -1,15 +1,14 @@
-import React from "react";
-import { ForumType } from "../../constant/type/DataType";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
+import { detailForumType, ForumType } from "../../constant/type/DataType";
 
 import { BsGear } from "react-icons/bs";
-import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
 import { UserState } from "../../context/UserContext";
 
 const ForumCard = (data: { data: ForumType }) => {
   const { user } = UserState();
   const navigate = useNavigate();
+  console.log(data);
   return (
     <div
       onClick={() => navigate(`/forum/s/${data.data.fuid}`)}
@@ -30,7 +29,7 @@ const ForumCard = (data: { data: ForumType }) => {
           <BiUpvote size={18} />
           <BiDownvote size={18} />
         </div>
-        <p>comment</p>
+        <p>{data.data.comment || 0} comment</p>
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SkeletonForum, ForumCard } from "..";
+import { ForumCard, SkeletonForum } from "..";
 
-import { ForumType } from "../../constant/type/DataType";
 import { getAllForum } from "../../function/handler/forum/forum";
 
 const ListForum = () => {

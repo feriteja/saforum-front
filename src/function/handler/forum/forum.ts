@@ -1,5 +1,9 @@
 import axios from "axios";
-import { AuthTokenType, ForumType } from "../../../constant/type/DataType";
+import {
+  AuthTokenType,
+  detailForumType,
+  ForumType,
+} from "../../../constant/type/DataType";
 axios.defaults.baseURL = "http://127.0.0.1:3003/api/forum";
 
 interface ResponseAllForumType {
@@ -8,7 +12,7 @@ interface ResponseAllForumType {
 }
 interface ResponseDetilForumType {
   message: string;
-  data: ForumType;
+  data: detailForumType;
 }
 
 const getAllForum = async (category?: string) => {
@@ -42,7 +46,7 @@ const addForum = async ({
   data,
   token,
 }: {
-  data: ForumType;
+  data: detailForumType;
   token: AuthTokenType;
 }) => {
   try {
