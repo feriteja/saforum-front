@@ -37,7 +37,10 @@ const ForumSubPage = () => {
                 content={data?.content}
               />
               <div className="h-3 bg-slate-300 rounded-full mt-5"></div>
-              <Comment alias={user?.alias || user?.username} />
+              <Comment
+                alias={user?.alias || user?.username}
+                forumID={forumID}
+              />
             </div>
           </div>
         </div>

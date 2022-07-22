@@ -32,7 +32,7 @@ export interface detailForumType extends Omit<ForumType, "comment"> {
 export interface CommentType {
   user?: string;
   comment: string;
-  created_at?: Date;
+  created_at: Date;
 }
 
 export enum categoryType {

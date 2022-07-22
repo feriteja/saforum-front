@@ -90,7 +90,10 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
         forumID: forumID,
       },
     });
-  } catch (error) {}
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
-export { addForum, getAllForum, getForumDetail };
+export { addForum, getAllForum, getForumDetail, addComment };

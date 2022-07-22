@@ -1,12 +1,41 @@
-import React, { SyntheticEvent } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { systemState } from "../../../context/SystemContext";
+import { addComment } from "../../../function/handler/forum/forum";
 
 interface props {
   alias?: string;
+  forumID?: string;
 }
 
 const Comment = ({ ...props }: props) => {
-  const onSubmit = (e: SyntheticEvent) => {
+  const [commentText, setCommentText] = useState("");
+  const [cookies] = useCookies();
+  const date = new Date();
+  const { showSnackbar, showLoading } = systemState();
+
+  const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    const data = {
+      comment: commentText,
+      created_at: date,
+    };
+
+    try {
+      showLoading(true);
+      await addComment({
+        comment: data,
+        token: cookies.authCookie,
+        forumID: props.forumID || "",
+      });
+      showLoading(false);
+      showSnackbar("success");
+    } catch (error) {
+      showLoading(false);
+      showSnackbar("failed");
+      console.log(error);
+      throw error;
+    }
   };
 
   return (
@@ -16,6 +45,7 @@ const Comment = ({ ...props }: props) => {
           Comment as <strong className="text-blue-500">{props.alias}</strong>
         </label>
         <textarea
+          onChange={(text) => setCommentText(text.target.value)}
           className="resize-none bg-primary outline-none border-2 w-full rounded-md px-3 py-1"
           name="commentArea"
           placeholder="What are your thought"
