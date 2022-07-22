@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   AuthTokenType,
+  CommentType,
   detailForumType,
   ForumType,
 } from "../../../constant/type/DataType";
@@ -13,6 +14,12 @@ interface ResponseAllForumType {
 interface ResponseDetilForumType {
   message: string;
   data: detailForumType;
+}
+
+interface AddCommentProps {
+  comment: CommentType;
+  token: AuthTokenType;
+  forumID: string;
 }
 
 const getAllForum = async (category?: string) => {
@@ -67,6 +74,23 @@ const addForum = async ({
   } catch (error) {
     throw error;
   }
+};
+
+const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
+  try {
+    const res = await axios({
+      method: "patch",
+      url: "/comment",
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+      },
+      data: {
+        refresh_token: token.refresh_token,
+        comment: comment,
+        forumID: forumID,
+      },
+    });
+  } catch (error) {}
 };
 
 export { addForum, getAllForum, getForumDetail };

@@ -17,7 +17,7 @@ export interface AuthTokenType {
 export interface ForumType {
   fuid?: string;
   title: string;
-  owner?: string;
+  owner: string;
   created_at?: Date;
   content?: string;
   comment?: number;
@@ -30,8 +30,9 @@ export interface detailForumType extends Omit<ForumType, "comment"> {
 }
 
 export interface CommentType {
-  user: string;
+  user?: string;
   comment: string;
+  created_at?: Date;
 }
 
 export enum categoryType {

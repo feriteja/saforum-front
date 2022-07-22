@@ -8,7 +8,7 @@ import { UserState } from "../../context/UserContext";
 const ForumCard = (data: { data: ForumType }) => {
   const { user } = UserState();
   const navigate = useNavigate();
-  console.log(data);
+
   return (
     <div
       onClick={() => navigate(`/forum/s/${data.data.fuid}`)}
