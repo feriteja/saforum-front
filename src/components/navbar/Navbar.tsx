@@ -71,7 +71,7 @@ const Navbar = () => {
                 }
                 to={"/signIn"}
               >
-                SignIn
+                Sign In
               </NavLink>
             </li>
           ) : (

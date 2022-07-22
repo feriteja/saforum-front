@@ -22,7 +22,7 @@ const Profile = () => {
             <BsGear size={20} className="sm:hidden" />
           </div>
         </div>
-        <p>Joined {joinDate.toLocaleDateString()} </p>
+        <p>Joined {joinDate.toLocaleDateString("id-ID")} </p>
       </div>
       <div></div>
     </div>

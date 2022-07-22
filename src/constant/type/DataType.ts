@@ -8,3 +8,38 @@ export interface UserType {
   uuid: string;
   created_at?: Date;
 }
+
+export interface AuthTokenType {
+  access_token: string;
+  refresh_token: string;
+}
+
+export interface ForumType {
+  fuid?: string;
+  title: string;
+  owner?: string;
+  created_at?: Date;
+  content?: string;
+  comment?: CommentType[];
+  view_count?: number;
+  like_count?: number;
+  category: string;
+}
+
+export interface CommentType {
+  user: string;
+  comment: string;
+}
+
+export enum categoryType {
+  public = "PUBLIC",
+  story = "STORY",
+  hobby = "HOBBY",
+  games = "GAMES",
+  entertainment = "ENTERTAINMENT",
+  female = "FEMALE",
+  tech = "TECH",
+  automotive = "AUTOMOTIVE",
+  sports = "SPORTS",
+  news = "NEWS",
+}
