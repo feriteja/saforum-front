@@ -1,6 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { SyntheticEvent, useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { getForumDetail } from "../../../function/handler/forum/forum";
 
 import { UserState } from "../../../context/UserContext";
@@ -25,14 +30,11 @@ const ForumSubPage = () => {
     return () => {};
   }, [forumID]);
 
-  console.log(error);
-
   if (isLoading) {
     return <SkeletonSubForum />;
   }
   if (!data || error) {
-    navigate("/notFound");
-    return <div></div>;
+    return <Navigate to="/notFound" replace />;
   }
 
   return (

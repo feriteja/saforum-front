@@ -10,6 +10,7 @@ import {
   HomePage,
   PostingPage,
   ProfilePage,
+  ProfilePageEdit,
 } from "./pages/main";
 import { UserProvider } from "./context/UserContext";
 import { NotFound } from "./pages/warn";
@@ -35,7 +36,11 @@ function App() {
                       <Route path=":category" element={<ForumPage />} />
                     </Route>
                     <Route path="forum/s/:forumID" element={<ForumSubPage />} />
-                    <Route path="/user/:username" element={<ProfilePage />} />
+
+                    <Route path="/user/">
+                      <Route path=":username" element={<ProfilePage />} />
+                      <Route path="edit" element={<ProfilePageEdit />} />
+                    </Route>
                     <Route path="/posting" element={<PostingPage />} />
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/signup" element={<SignUp />} />
