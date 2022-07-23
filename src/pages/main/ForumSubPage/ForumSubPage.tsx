@@ -13,7 +13,7 @@ const ForumSubPage = () => {
   const { isLoading, error, data } = useQuery(
     ["forumDetail", forumID],
     () => getForumDetail(forumID),
-    { refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false, retry: 1, refetchOnReconnect: true }
   );
   const { user } = UserState();
 
@@ -28,13 +28,12 @@ const ForumSubPage = () => {
   if (isLoading) {
     return <SkeletonSubForum />;
   }
-  if (!data) {
-    return navigate("/notFound");
+  if (!data || error) {
+    navigate("/notFound");
+    return <div></div>;
   }
 
-  if (error) {
-    return <div>error</div>;
-  }
+  console.log(data);
 
   return (
     <div className="space-y-7">
@@ -52,7 +51,11 @@ const ForumSubPage = () => {
           </div>
         </div>
       </div>
-      <Comment alias={user?.alias || user?.username} forumID={forumID} />
+      <Comment
+        alias={user?.alias || user?.username}
+        forumID={forumID}
+        comment={data.comment}
+      />
     </div>
   );
 };

@@ -1,12 +1,15 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { CommentCard } from "../../../components";
+import { CommentType } from "../../../constant/type/DataType";
 import { systemState } from "../../../context/SystemContext";
 import { addComment } from "../../../function/handler/forum/forum";
 
 interface props {
   alias?: string;
   forumID?: string;
+  comment?: CommentType[];
 }
 
 const Comment = ({ ...props }: props) => {
@@ -31,22 +34,21 @@ const Comment = ({ ...props }: props) => {
         forumID: props.forumID || "",
       });
       showLoading(false);
-      showSnackbar("success");
-      setCommentText("");
-      navigate(`/forum/s/${props.forumID}`);
+      showSnackbar("comment success");
+
+      navigate(0);
     } catch (error) {
       showLoading(false);
-      showSnackbar("failed");
-      console.log(error);
+      showSnackbar("comment failed");
       throw error;
     }
   };
 
   return (
-    <div className="pt-4  bg-primary">
+    <div className="py-4  bg-primary">
       <form
         onSubmit={onSubmit}
-        className="flex flex-col space-y-2 ml-10 px-4 border-b-2 pb-3"
+        className="flex flex-col space-y-2 ml-10 px-4 border-b-2 mr-3 pb-3"
       >
         <label htmlFor="commentArea" className="text-sm">
           Comment as <strong className="text-blue-500">{props.alias}</strong>
@@ -66,6 +68,9 @@ const Comment = ({ ...props }: props) => {
           className="cursor-pointer self-end mr-3 text-black  rounded-full bg-accent  px-3 py-1 font-bold"
         />
       </form>
+      {props.comment?.map((val, idx) => {
+        return <CommentCard key={val.id} {...val} />;
+      })}
     </div>
   );
 };

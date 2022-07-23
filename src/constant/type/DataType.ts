@@ -30,9 +30,13 @@ export interface detailForumType extends Omit<ForumType, "comment"> {
 }
 
 export interface CommentType {
+  id?: string;
   user?: string;
+  username?: string;
+  avatar?: null;
+  alias?: null;
   comment: string;
-  created_at: Date;
+  created_at?: Date;
 }
 
 export enum categoryType {

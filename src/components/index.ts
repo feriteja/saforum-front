@@ -5,6 +5,7 @@ export { default as SnackBar } from "./warn/snackbar/Snackbar";
 export { default as Loading } from "./warn/loading/Loading";
 export { default as PostCard } from "./cards/PostCard";
 export { default as ForumCard } from "./cards/ForumCard";
+export { default as CommentCard } from "./cards/CommentCard";
 export { default as SkeletonForum } from "./skeleton/SkeletonForum";
 export { default as SkeletonSubForum } from "./skeleton/SkeletonSubForum";
 export { default as SkeletonCommentCard } from "./skeleton/SkeletonCommentCard";
