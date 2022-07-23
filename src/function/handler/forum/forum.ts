@@ -5,7 +5,6 @@ import {
   detailForumType,
   ForumType,
 } from "../../../constant/type/DataType";
-axios.defaults.baseURL = "http://127.0.0.1:3003/api/forum";
 
 interface ResponseAllForumType {
   message: string;
@@ -26,6 +25,7 @@ const getAllForum = async (category?: string) => {
   try {
     const res = await axios.request<ResponseAllForumType>({
       method: "get",
+      baseURL: "http://127.0.0.1:3003/api/forum",
       url: "/",
       data: {
         category,
@@ -41,6 +41,7 @@ const getForumDetail = async (forumId?: string) => {
   try {
     const res = await axios.request<ResponseDetilForumType>({
       method: "get",
+      baseURL: "http://127.0.0.1:3003/api/forum",
       url: `/s/${forumId}`,
     });
     return res.data.data;
@@ -59,6 +60,7 @@ const addForum = async ({
   try {
     const res = await axios({
       method: "post",
+      baseURL: "http://127.0.0.1:3003/api/forum",
       url: "/add",
       headers: {
         Authorization: `Bearer ${token.access_token}`,
@@ -80,6 +82,7 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
   try {
     const res = await axios({
       method: "patch",
+      baseURL: "http://127.0.0.1:3003/api/forum",
       url: "/comment",
       headers: {
         Authorization: `Bearer ${token.access_token}`,

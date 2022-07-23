@@ -33,8 +33,6 @@ const PostingPage = () => {
       showLoading(false);
       showSnackbar("Post failed :( .. something wrong");
 
-      console.error("errorPost", error);
-
       throw error;
     }
   };

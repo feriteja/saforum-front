@@ -35,8 +35,8 @@ function App() {
                       <Route path=":category" element={<ForumPage />} />
                     </Route>
                     <Route path="forum/s/:forumID" element={<ForumSubPage />} />
+                    <Route path="/user/:username" element={<ProfilePage />} />
                     <Route path="/posting" element={<PostingPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="notFound" element={<NotFound />} />

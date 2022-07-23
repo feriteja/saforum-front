@@ -16,7 +16,12 @@ const ForumCard = (data: { data: ForumType }) => {
     >
       <div className="flex justify-between">
         <p className="text-xs text-gray-400">Posted by {data.data.owner} </p>
-        {user?.username === data.data.owner && <BsGear />}
+        <div className="flex items-center space-x-3">
+          <h2 className="font-semibold text-sm capitalize">
+            s/{data.data.category.toLowerCase()}
+          </h2>
+          {user?.username === data.data.owner && <BsGear />}
+        </div>
       </div>
 
       <h1 className="font-semibold text-lg">{data.data.title}</h1>

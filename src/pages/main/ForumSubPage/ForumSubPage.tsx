@@ -33,8 +33,6 @@ const ForumSubPage = () => {
     return <div></div>;
   }
 
-  console.log(data);
-
   return (
     <div className="space-y-7">
       <div className="relative  px-3 py-6 top-5 bg-primary  shadow rounded  ">
@@ -43,8 +41,8 @@ const ForumSubPage = () => {
           <div className="pb-3 w-full">
             <Content
               category={data?.category}
-              owner={data?.owner}
-              title={data?.title}
+              owner={data?.owner || ""}
+              title={data?.title || ""}
               content={data?.content}
             />
             <div className="h-3 bg-slate-300 rounded-full mt-5"></div>

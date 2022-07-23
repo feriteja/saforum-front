@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { MdClose, MdMenu } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import category from "../../constant/data/category";
 import { systemState } from "../../context/SystemContext";
 import { UserState } from "../../context/UserContext";
 import { signOutFunc } from "../../function/handler/auth/auth";
@@ -15,7 +16,6 @@ const Navbar = () => {
   const { user } = UserState();
 
   const handleNav = () => {
-    console.log(user);
     setIsOpen((prev) => !prev);
   };
 
@@ -38,9 +38,20 @@ const Navbar = () => {
   return (
     <>
       <nav className=" flex items-center justify-between h-16 bg-primary shadow-xl  w-full px-2 sm:px-4 md:px-6 ">
-        <NavLink to={"/"}>
-          <h1 className="font-bold text-2xl z-40">SaForum</h1>
-        </NavLink>
+        <div className="flex items-center ">
+          <NavLink to={"/"}>
+            <h1 className="font-bold text-2xl z-40">SaForum</h1>
+          </NavLink>
+          <div className="hidden ml-3 space-x-2 w-1/2 overflow-hidden  md:flex">
+            {category.map((val, idx) => {
+              return (
+                <h2 className="capitalize " key={val}>
+                  {val.toLowerCase()}
+                </h2>
+              );
+            })}
+          </div>
+        </div>
         <ul className="hidden sm:flex font-bold items-center text-center sm:text-sm md:text-base ">
           <li className="mx-2">
             <NavLink
@@ -81,7 +92,7 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     isActive ? "text-accent" : "text-primary"
                   }
-                  to={"/profile"}
+                  to={`/user/${user.username}`}
                 >
                   Profile
                 </NavLink>

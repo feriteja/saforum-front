@@ -16,8 +16,8 @@ export interface AuthTokenType {
 
 export interface ForumType {
   fuid?: string;
-  title: string;
-  owner: string;
+  title?: string;
+  owner?: string;
   created_at?: Date;
   content?: string;
   comment?: number;
