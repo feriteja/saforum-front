@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ForumCard, SkeletonForum } from "..";
 
@@ -13,6 +14,11 @@ const ListForum = () => {
   } = useQuery(["forumList", category.toString()], () =>
     getAllForum(category.toString())
   );
+
+  useEffect(() => {
+    console.log(error);
+    console.log(forumList);
+  }, [isLoading]);
 
   return (
     <div className="space-y-3">

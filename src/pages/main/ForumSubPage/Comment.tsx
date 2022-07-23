@@ -43,8 +43,11 @@ const Comment = ({ ...props }: props) => {
   };
 
   return (
-    <div className="pt-4 mt-2 ">
-      <form onSubmit={onSubmit} className="flex flex-col space-y-2 ">
+    <div className="pt-4  bg-primary">
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col space-y-2 ml-10 px-4 border-b-2 pb-3"
+      >
         <label htmlFor="commentArea" className="text-sm">
           Comment as <strong className="text-blue-500">{props.alias}</strong>
         </label>
