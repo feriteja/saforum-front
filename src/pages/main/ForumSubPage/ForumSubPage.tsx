@@ -25,6 +25,8 @@ const ForumSubPage = () => {
     return () => {};
   }, [forumID]);
 
+  console.log(error);
+
   if (isLoading) {
     return <SkeletonSubForum />;
   }

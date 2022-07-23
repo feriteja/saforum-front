@@ -10,14 +10,33 @@ const Profile = () => {
   const { user } = UserState();
   const { username } = useParams();
 
-  const { isLoading, error, data } = useQuery(["profile", username], () =>
-    getUserDetailByUsername(username || "")
+  const { isLoading, error, data } = useQuery(
+    ["profile", username],
+    () => getUserDetailByUsername(username),
+    { retry: 1 }
   );
+
+  console.log(data);
 
   if (isLoading) {
     return (
       <div>
         <h1> loading</h1>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1>error</h1>
+      </div>
+    );
+  }
+  if (!data) {
+    return (
+      <div>
+        <h1>nodata</h1>
       </div>
     );
   }

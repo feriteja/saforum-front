@@ -15,8 +15,6 @@ const ListForum = () => {
     getAllForum(category.toString())
   );
 
-  useEffect(() => {}, [isLoading]);
-
   return (
     <div className="space-y-3">
       {!forumList || isLoading

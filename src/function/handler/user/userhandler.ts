@@ -3,21 +3,19 @@ import { UserType } from "../../../constant/type/DataType";
 
 interface ProfileResponseType {
   message: string;
-  data: UserType;
+  user: UserType;
 }
 
-const getUserDetailByUsername = async (username: string) => {
+const getUserDetailByUsername = async (username?: string) => {
   try {
+    console.log("username", username);
     const res = await axios.request<ProfileResponseType>({
-      baseURL: "http://127.0.0.1:3003/api/user",
       method: "get",
-      url: "/detail",
-      data: {
-        username,
-      },
+      baseURL: "http://127.0.0.1:3003/api/user",
+      url: `/detail/${username}`,
     });
 
-    return res.data.data;
+    return res.data.user;
   } catch (error) {
     throw error;
   }
