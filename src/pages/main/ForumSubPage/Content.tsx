@@ -1,18 +1,26 @@
 import React from "react";
+import Moment from "react-moment";
 
 interface props {
   category: string;
   owner: string;
   title: string;
   content?: string;
+  created_at?: Date;
 }
 
 const Content = ({ ...props }: props) => {
   return (
     <div className="space-y-2">
-      <div className="flex space-x-4 ">
+      <div className="flex space-x-2 ">
         <h2 className="text-xs font-bold flex">s/{props.category}</h2>
         <p className="text-xs ">. Posted by u/{props.owner}</p>
+        <Moment
+          format="D MMM YYYY"
+          date={props.created_at}
+          withTitle
+          className="text-xs "
+        />
       </div>
       <h1 className="font-semibold text-xl">{props.title}</h1>
       <p>{props.content}</p>

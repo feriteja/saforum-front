@@ -1,6 +1,7 @@
 import React from "react";
 import { CommentType } from "../../constant/type/DataType";
 import avatar from "../../assets/avatar/avataaars (3).png";
+import Moment from "react-moment";
 
 const CommentCard = (props: CommentType) => {
   return (
@@ -9,9 +10,16 @@ const CommentCard = (props: CommentType) => {
         <img src={props.avatar || avatar} className="w-8" alt="avatar" />
       </div>
       <div className="w-full space-y-2 pr-10  ">
-        <h1 className="text-lg font-semibold">
-          {props.alias || props.username}
-        </h1>
+        <div className="flex justify-between">
+          <h1 className="text-lg font-semibold">
+            {props.alias || props.username}
+          </h1>
+          <Moment
+            fromNow
+            date={props.created_at}
+            className="font-thin text-sm"
+          />
+        </div>
         <p className="border-b-2">{props.comment}</p>
       </div>
     </div>

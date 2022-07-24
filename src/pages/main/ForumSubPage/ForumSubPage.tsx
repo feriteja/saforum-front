@@ -46,8 +46,9 @@ const ForumSubPage = () => {
               owner={data?.owner || ""}
               title={data?.title || ""}
               content={data?.content}
+              created_at={data?.created_at}
             />
-            <div className="h-3 bg-slate-300 rounded-full mt-5"></div>
+            <div className="h-3 bg-red-300 rounded-full mt-5"></div>
           </div>
         </div>
       </div>
