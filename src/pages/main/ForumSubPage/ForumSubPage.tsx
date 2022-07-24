@@ -22,8 +22,6 @@ const ForumSubPage = () => {
   );
   const { user } = UserState();
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     window.scrollTo(0, 0);
 

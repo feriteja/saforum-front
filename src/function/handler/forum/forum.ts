@@ -16,7 +16,7 @@ interface ResponseDetilForumType {
 }
 
 interface AddCommentProps {
-  comment: CommentType;
+  comment: string;
   token: AuthTokenType;
   forumID: string;
 }

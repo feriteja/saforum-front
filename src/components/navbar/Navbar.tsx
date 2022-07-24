@@ -13,7 +13,7 @@ const Navbar = () => {
   const { showSnackbar, showLoading } = systemState();
   const navigate = useNavigate();
 
-  const { user } = UserState();
+  const { user, setUser } = UserState();
 
   const handleNav = () => {
     setIsOpen((prev) => !prev);
@@ -22,8 +22,8 @@ const Navbar = () => {
   const onLogout = async () => {
     try {
       await signOutFunc(cookies.authCookie);
-
       removeCookie("authCookie");
+      setUser(null);
       showSnackbar("SignOut success");
       navigate("/");
     } catch (error) {
@@ -42,15 +42,6 @@ const Navbar = () => {
           <NavLink to={"/"}>
             <h1 className="font-bold text-2xl z-40">SaForum</h1>
           </NavLink>
-          <div className="hidden ml-3 space-x-2 w-1/2 overflow-hidden  md:flex">
-            {category.map((val, idx) => {
-              return (
-                <h2 className="capitalize " key={val}>
-                  {val.toLowerCase()}
-                </h2>
-              );
-            })}
-          </div>
         </div>
         <ul className="hidden sm:flex font-bold items-center text-center sm:text-sm md:text-base ">
           <li className="mx-2">

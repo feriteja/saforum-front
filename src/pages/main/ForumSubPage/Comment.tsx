@@ -21,22 +21,17 @@ const Comment = ({ ...props }: props) => {
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    const data = {
-      comment: commentText,
-      created_at: date,
-    };
 
     try {
       showLoading(true);
       await addComment({
-        comment: data,
+        comment: commentText,
         token: cookies.authCookie,
         forumID: props.forumID || "",
       });
       showLoading(false);
       showSnackbar("comment success");
-
-      navigate(0);
+      location.reload();
     } catch (error) {
       showLoading(false);
       showSnackbar("comment failed");

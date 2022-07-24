@@ -5,6 +5,7 @@ import { UserType } from "../constant/type/DataType";
 
 export interface userStateContextProps {
   user: UserType | null;
+  setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
 }
 
 const UserContext = createContext<Partial<userStateContextProps>>({});
@@ -28,7 +29,9 @@ const UserProvider: React.FC<any> = ({ children }) => {
   }, [cookies.authCookie, decodedToken, isExpired]);
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 
