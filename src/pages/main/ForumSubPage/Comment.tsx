@@ -5,6 +5,7 @@ import { AuthTokenType, CommentType } from "../../../constant/type/DataType";
 import { systemState } from "../../../context/SystemContext";
 import { addComment } from "../../../function/handler/forum/forum";
 import { useLocalStorage } from "usehooks-ts";
+import { UserState } from "../../../context/UserContext";
 
 interface props {
   alias?: string;
@@ -18,7 +19,7 @@ const Comment = ({ ...props }: props) => {
     "authToken",
     null
   );
-  const date = new Date();
+  const { user } = UserState();
   const { showSnackbar, showLoading } = systemState();
   const navigate = useNavigate();
 
@@ -26,6 +27,10 @@ const Comment = ({ ...props }: props) => {
     e.preventDefault();
 
     try {
+      if (!user) {
+        showSnackbar("You must login first");
+        return navigate("/signin");
+      }
       showLoading(true);
       await addComment({
         comment: commentText,
@@ -34,7 +39,7 @@ const Comment = ({ ...props }: props) => {
       });
       showLoading(false);
       showSnackbar("comment success");
-      location.reload();
+      navigate(0);
     } catch (error) {
       showLoading(false);
       showSnackbar("comment failed");

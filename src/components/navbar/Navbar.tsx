@@ -47,9 +47,9 @@ const Navbar = () => {
           </NavLink>
         </div>
         <ul className="hidden sm:flex font-bold items-center text-center sm:text-sm md:text-base ">
-          <li className="mx-2">
-            <button onClick={() => console.log(user, token)}>test</button>
-          </li>
+          {/* <li className="mx-2">
+            <button onClick={() => console.log(user, token)}>Show State user</button>
+          </li> */}
           <li className="mx-2">
             <NavLink
               className={({ isActive }) =>

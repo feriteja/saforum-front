@@ -3,7 +3,7 @@ import React, { SyntheticEvent, useState } from "react";
 import { AiFillGoogleCircle, AiFillTwitterCircle } from "react-icons/ai";
 import { BiLockAlt, BiUser } from "react-icons/bi";
 import { BsFacebook } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { InputForm } from "../../components";
 import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
@@ -17,6 +17,7 @@ const SignUp = () => {
   const [confPassword, setConfPassword] = useState("");
   const [error, setError] = useState("");
   const { showSnackbar, showLoading } = systemState();
+  const { user } = UserState();
 
   const navigate = useNavigate();
   const [token, setToken] = useLocalStorage<AuthTokenType | null>(
@@ -44,6 +45,10 @@ const SignUp = () => {
       showLoading(false);
     }
   };
+
+  if (user) {
+    return <Navigate to={"/"} replace />;
+  }
 
   return (
     <div className=" min-h-screen flex flex-col  justify-center   max-w-5xl mx-auto   ">

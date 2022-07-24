@@ -17,6 +17,7 @@ import { NotFound } from "./pages/warn";
 import { SystemProvider } from "./context/SystemContext";
 import { CookiesProvider } from "react-cookie";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RequireAuth } from "./function/handler/route/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +40,10 @@ function App() {
 
                     <Route path="/user/">
                       <Route path=":username" element={<ProfilePage />} />
-                      <Route path="edit" element={<ProfilePageEdit />} />
+                      <Route
+                        path="edit"
+                        element={<RequireAuth children={<ProfilePageEdit />} />}
+                      />
                     </Route>
                     <Route path="/posting" element={<PostingPage />} />
                     <Route path="/signin" element={<SignIn />} />

@@ -3,12 +3,13 @@ import { AiFillGoogleCircle, AiFillTwitterCircle } from "react-icons/ai";
 
 import { BiLockAlt, BiUser } from "react-icons/bi";
 import { BsFacebook } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { InputForm } from "../../components";
 import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { signInFunc } from "../../function/handler/auth/auth";
 import { useLocalStorage } from "usehooks-ts";
+import { UserState } from "../../context/UserContext";
 
 const signIn = () => {
   const [userName, setUserName] = useState("");
@@ -16,6 +17,7 @@ const signIn = () => {
   const { showSnackbar, showLoading } = systemState();
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { user } = UserState();
 
   const [token, setToken] = useLocalStorage<AuthTokenType | null>(
     "authToken",
@@ -40,6 +42,10 @@ const signIn = () => {
       showLoading(false);
     }
   };
+
+  if (user) {
+    return <Navigate to={"/"} replace />;
+  }
 
   return (
     <div className=" min-h-screen flex flex-col  justify-center  max-w-5xl mx-auto   ">
