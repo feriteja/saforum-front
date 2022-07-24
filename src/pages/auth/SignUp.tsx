@@ -9,7 +9,7 @@ import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { UserState, userStateContextProps } from "../../context/UserContext";
 import { signUpFunc } from "../../function/handler/auth/auth";
-import useLocalStorage from "../../function/hook/userLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");

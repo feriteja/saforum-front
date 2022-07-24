@@ -4,7 +4,7 @@ import { CommentCard } from "../../../components";
 import { AuthTokenType, CommentType } from "../../../constant/type/DataType";
 import { systemState } from "../../../context/SystemContext";
 import { addComment } from "../../../function/handler/forum/forum";
-import useLocalStorage from "../../../function/hook/userLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 interface props {
   alias?: string;

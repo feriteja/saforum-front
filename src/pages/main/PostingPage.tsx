@@ -4,7 +4,7 @@ import categoryList from "../../constant/data/category";
 import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { addForum } from "../../function/handler/forum/forum";
-import useLocalStorage from "../../function/hook/userLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 const PostingPage = () => {
   const [title, setTitle] = useState("second");

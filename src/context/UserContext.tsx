@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useJwt } from "react-jwt";
+import { useLocation } from "react-router-dom";
 import { AuthTokenType, UserType } from "../constant/type/DataType";
-import useLocalStorage from "../function/hook/userLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 export interface userStateContextProps {
   user: UserType | null;
@@ -17,7 +18,9 @@ const UserProvider: React.FC<any> = ({ children }) => {
     null
   );
 
-  const { decodedToken, isExpired } = useJwt(token?.access_token || "sads");
+  const { pathname } = useLocation();
+
+  const { decodedToken, isExpired } = useJwt(token?.access_token || "");
 
   useEffect(() => {
     if (!isExpired) {
@@ -25,7 +28,7 @@ const UserProvider: React.FC<any> = ({ children }) => {
     } else {
       setUser(null);
     }
-  }, [token, decodedToken, isExpired]);
+  }, [decodedToken, isExpired]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

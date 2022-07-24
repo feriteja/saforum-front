@@ -5,7 +5,7 @@ import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { UserState } from "../../context/UserContext";
 import { signOutFunc } from "../../function/handler/auth/auth";
-import useLocalStorage from "../../function/hook/userLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,6 @@ const Navbar = () => {
     try {
       await signOutFunc(token as AuthTokenType);
       setToken(null);
-      setUser(null);
 
       showSnackbar("SignOut success");
       navigate("/");

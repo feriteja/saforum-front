@@ -8,7 +8,7 @@ import { InputForm } from "../../components";
 import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { signInFunc } from "../../function/handler/auth/auth";
-import useLocalStorage from "../../function/hook/userLocalStorage";
+import { useLocalStorage } from "usehooks-ts";
 
 const signIn = () => {
   const [userName, setUserName] = useState("");
@@ -33,7 +33,7 @@ const signIn = () => {
 
       showLoading(false);
 
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (error: any) {
       setError(error.data.message);
       showSnackbar("login failed");
