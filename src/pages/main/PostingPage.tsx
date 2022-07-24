@@ -1,11 +1,10 @@
-import React, { SyntheticEvent, useRef, useState } from "react";
-import { useCookies } from "react-cookie";
+import { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import categoryList from "../../constant/data/category";
-import { categoryType } from "../../constant/type/DataType";
+import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
-import { UserState } from "../../context/UserContext";
 import { addForum } from "../../function/handler/forum/forum";
+import useLocalStorage from "../../function/hook/userLocalStorage";
 
 const PostingPage = () => {
   const [title, setTitle] = useState("second");
@@ -13,7 +12,10 @@ const PostingPage = () => {
   const [category, setCategory] = useState("PUBLIC");
   const { showLoading, showSnackbar } = systemState();
 
-  const [cookies] = useCookies();
+  const [token, setToken] = useLocalStorage<AuthTokenType | null>(
+    "authToken",
+    null
+  );
   const navigate = useNavigate();
 
   const onSubmit = async (e: SyntheticEvent) => {
@@ -24,7 +26,7 @@ const PostingPage = () => {
     try {
       await addForum({
         data,
-        token: cookies.authCookie,
+        token: token as AuthTokenType,
       });
       showLoading(false);
       showSnackbar("Post success :)");

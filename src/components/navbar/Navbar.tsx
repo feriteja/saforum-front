@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { useCookies } from "react-cookie";
+import { useState } from "react";
 import { MdClose, MdMenu } from "react-icons/md";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import category from "../../constant/data/category";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { UserState } from "../../context/UserContext";
 import { signOutFunc } from "../../function/handler/auth/auth";
+import useLocalStorage from "../../function/hook/userLocalStorage";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [cookies, setCookies, removeCookie] = useCookies();
+  const [token, setToken] = useLocalStorage<AuthTokenType | null>(
+    "authToken",
+    null
+  );
   const { showSnackbar, showLoading } = systemState();
   const navigate = useNavigate();
 
@@ -21,9 +24,10 @@ const Navbar = () => {
 
   const onLogout = async () => {
     try {
-      await signOutFunc(cookies.authCookie);
-      removeCookie("authCookie");
+      await signOutFunc(token as AuthTokenType);
+      setToken(null);
       setUser(null);
+
       showSnackbar("SignOut success");
       navigate("/");
     } catch (error) {
@@ -32,7 +36,7 @@ const Navbar = () => {
   };
 
   const forceLogout = () => {
-    removeCookie("authCookie");
+    setToken(null);
   };
 
   return (
@@ -44,6 +48,9 @@ const Navbar = () => {
           </NavLink>
         </div>
         <ul className="hidden sm:flex font-bold items-center text-center sm:text-sm md:text-base ">
+          <li className="mx-2">
+            <button onClick={() => console.log(user, token)}>test</button>
+          </li>
           <li className="mx-2">
             <NavLink
               className={({ isActive }) =>

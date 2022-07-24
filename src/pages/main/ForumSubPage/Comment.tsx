@@ -1,10 +1,10 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import { SyntheticEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CommentCard } from "../../../components";
-import { CommentType } from "../../../constant/type/DataType";
+import { AuthTokenType, CommentType } from "../../../constant/type/DataType";
 import { systemState } from "../../../context/SystemContext";
 import { addComment } from "../../../function/handler/forum/forum";
+import useLocalStorage from "../../../function/hook/userLocalStorage";
 
 interface props {
   alias?: string;
@@ -14,7 +14,10 @@ interface props {
 
 const Comment = ({ ...props }: props) => {
   const [commentText, setCommentText] = useState("");
-  const [cookies] = useCookies();
+  const [token, setToken] = useLocalStorage<AuthTokenType | null>(
+    "authToken",
+    null
+  );
   const date = new Date();
   const { showSnackbar, showLoading } = systemState();
   const navigate = useNavigate();
@@ -26,7 +29,7 @@ const Comment = ({ ...props }: props) => {
       showLoading(true);
       await addComment({
         comment: commentText,
-        token: cookies.authCookie,
+        token: token as AuthTokenType,
         forumID: props.forumID || "",
       });
       showLoading(false);

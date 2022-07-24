@@ -1,13 +1,15 @@
 import React, { SyntheticEvent, useState } from "react";
-import { useCookies } from "react-cookie";
+
 import { AiFillGoogleCircle, AiFillTwitterCircle } from "react-icons/ai";
 import { BiLockAlt, BiUser } from "react-icons/bi";
 import { BsFacebook } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { InputForm } from "../../components";
+import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { UserState, userStateContextProps } from "../../context/UserContext";
 import { signUpFunc } from "../../function/handler/auth/auth";
+import useLocalStorage from "../../function/hook/userLocalStorage";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -17,7 +19,10 @@ const SignUp = () => {
   const { showSnackbar, showLoading } = systemState();
 
   const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies();
+  const [token, setToken] = useLocalStorage<AuthTokenType | null>(
+    "authToken",
+    null
+  );
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -29,7 +34,7 @@ const SignUp = () => {
     try {
       showLoading(true);
       const res = await signUpFunc(userName, password);
-      setCookies("authCookie", res.data.token);
+      setToken(res.data.token);
 
       showLoading(false);
       navigate("/");

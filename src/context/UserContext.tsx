@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { useJwt } from "react-jwt";
-import { UserType } from "../constant/type/DataType";
+import { AuthTokenType, UserType } from "../constant/type/DataType";
+import useLocalStorage from "../function/hook/userLocalStorage";
 
 export interface userStateContextProps {
   user: UserType | null;
@@ -12,10 +12,12 @@ const UserContext = createContext<Partial<userStateContextProps>>({});
 
 const UserProvider: React.FC<any> = ({ children }) => {
   const [user, setUser] = useState<UserType | null>(null);
-  const [cookies, setCookies] = useCookies();
-  const { decodedToken, isExpired } = useJwt(
-    cookies?.authCookie?.access_token || "sads"
+  const [token, setToken] = useLocalStorage<AuthTokenType | null>(
+    "authToken",
+    null
   );
+
+  const { decodedToken, isExpired } = useJwt(token?.access_token || "sads");
 
   useEffect(() => {
     if (!isExpired) {
@@ -23,10 +25,7 @@ const UserProvider: React.FC<any> = ({ children }) => {
     } else {
       setUser(null);
     }
-    return () => {
-      setUser(null);
-    };
-  }, [cookies.authCookie, decodedToken, isExpired]);
+  }, [token, decodedToken, isExpired]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
