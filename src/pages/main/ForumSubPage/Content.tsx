@@ -7,9 +7,7 @@ const Content = ({ ...props }: detailForumType) => {
     <div className="space-y-2">
       <div className="flex space-x-2 ">
         <h2 className="text-xs font-bold flex">s/{props.category}</h2>
-        <p className="text-xs ">
-          . Posted by u/{props.alias || props.username}
-        </p>
+        <p className="text-xs ">. Posted by u/{props.username}</p>
         <Moment
           format="D MMM YYYY"
           date={props.created_at}

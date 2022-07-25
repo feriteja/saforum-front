@@ -40,7 +40,8 @@ const Profile = () => {
         <div className="flex items-center justify-between">
           <img
             src={
-              "http://127.0.0.1:3003/public/tmp/" + (data?.avatar as string) ||
+              (data.avatar &&
+                `http://127.0.0.1:3003/public/tmp/${data.avatar as string}`) ||
               avatar
             }
             alt="avatar"
