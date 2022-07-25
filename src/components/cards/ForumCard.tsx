@@ -34,6 +34,13 @@ const ForumCard = (data: { data: ForumType }) => {
       </div>
 
       <h1 className="font-semibold text-lg">{data.data.title}</h1>
+      {data.data.banner && (
+        <img
+          src={`http://127.0.0.1:3003/public/tmp/${data.data.banner}`}
+          alt="banner"
+          className="w-11/12 h-40 mx-auto rounded"
+        />
+      )}
 
       <div className=" line-clamp-6">
         <p>{data.data.content}</p>

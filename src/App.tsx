@@ -9,6 +9,8 @@ import {
   ForumSubPage,
   HomePage,
   PostingPage,
+  ProfileActivity,
+  ProfileForum,
   ProfilePage,
   ProfilePageEdit,
 } from "./pages/main";
@@ -40,6 +42,7 @@ function App() {
 
                     <Route path="/user/">
                       <Route path=":username" element={<ProfilePage />} />
+
                       <Route
                         path="edit"
                         element={<RequireAuth children={<ProfilePageEdit />} />}

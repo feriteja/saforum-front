@@ -40,7 +40,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=" flex items-center justify-between h-16 bg-primary shadow-xl  w-full px-2 sm:px-4 md:px-6 ">
+      <nav className=" flex items-center justify-between h-16 bg-primary shadow-xl  z-10 w-full px-2 sm:px-4 md:px-6 ">
         <div className="flex items-center ">
           <NavLink to={"/"}>
             <h1 className="font-bold text-2xl z-40">SaForum</h1>

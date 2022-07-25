@@ -1,5 +1,9 @@
 import axios from "axios";
-import { AuthTokenType, UserType } from "../../../constant/type/DataType";
+import {
+  AuthTokenType,
+  ForumType,
+  UserType,
+} from "../../../constant/type/DataType";
 
 interface ProfileResponseType {
   message: string;
@@ -38,10 +42,24 @@ const updateUser = async (formData: FormData, token: AuthTokenType) => {
       },
       data: formData,
     });
-    console.log("halo");
+    return true;
   } catch (error) {
     throw error;
   }
 };
 
-export { getUserDetailByUsername, updateUser };
+const getUserForumByUsername = async (username: string) => {
+  try {
+    const res = await axios.request<ForumType[]>({
+      method: "get",
+      baseURL: "http://127.0.0.1:3003/api/user",
+      url: `/${username}`,
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export { getUserDetailByUsername, updateUser, getUserForumByUsername };

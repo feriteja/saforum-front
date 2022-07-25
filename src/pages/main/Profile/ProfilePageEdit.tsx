@@ -47,7 +47,6 @@ const ProfilePageEdit = () => {
 
   return (
     <div className="bg-primary py-8 px-6 ">
-      <button onClick={() => console.log("data")}>show</button>
       <form
         onSubmit={onSubmit}
         encType="multipart/form-data"

@@ -71,9 +71,16 @@ const Comment = ({ ...props }: props) => {
           className="cursor-pointer self-end mr-3 text-black  rounded-full bg-accent  px-3 py-1 font-bold"
         />
       </form>
-      {props.comment?.map((val, idx) => {
-        return <CommentCard key={val.id} {...val} />;
-      })}
+      {props.comment
+        ?.sort((a, b) => {
+          return (
+            new Date(b.created_at as Date).getTime() -
+            new Date(a.created_at as Date).getTime()
+          );
+        })
+        .map((val, idx) => {
+          return <CommentCard key={val.id} {...val} />;
+        })}
     </div>
   );
 };

@@ -11,6 +11,7 @@ const PostingPage = () => {
   const [content, setContent] = useState<string>("");
   const [category, setCategory] = useState("PUBLIC");
   const { showLoading, showSnackbar } = systemState();
+  const [banner, setBanner] = useState("");
 
   const [token, setToken] = useLocalStorage<AuthTokenType | null>(
     "authToken",
@@ -21,11 +22,16 @@ const PostingPage = () => {
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     showLoading(true);
-    const data = { title, content, category };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("refresh_token", token?.refresh_token || "");
+    formData.append("content", content);
+    formData.append("category", category);
+    formData.append("banner", banner);
 
     try {
       await addForum({
-        data,
+        data: formData,
         token: token as AuthTokenType,
       });
       showLoading(false);
@@ -44,6 +50,13 @@ const PostingPage = () => {
       <h1 className="font-semibold text-lg">Create Post</h1>
       <div className="bg-primary shadow-md w-full px-3 py-4 mt-2">
         <form onSubmit={onSubmit} className="flex flex-col space-y-3">
+          <input
+            type="file"
+            name="avatar"
+            accept="image/*"
+            multiple={false}
+            onChange={(img) => setBanner(img.target.files[0])}
+          />
           <input
             id="titlePost"
             type="text"

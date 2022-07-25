@@ -54,7 +54,7 @@ const addForum = async ({
   data,
   token,
 }: {
-  data: detailForumType;
+  data: FormData;
   token: AuthTokenType;
 }) => {
   try {
@@ -65,12 +65,7 @@ const addForum = async ({
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
-      data: {
-        refresh_token: token.refresh_token,
-        title: data.title,
-        content: data.content,
-        category: data.category,
-      },
+      data: data,
     });
     return res;
   } catch (error) {
