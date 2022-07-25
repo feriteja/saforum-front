@@ -26,6 +26,8 @@ export interface ForumType {
   category: string;
 }
 export interface detailForumType extends Omit<ForumType, "comment"> {
+  username: string;
+  alias?: string;
   comment?: CommentType[];
 }
 

@@ -41,13 +41,7 @@ const ForumSubPage = () => {
         <div className="flex border-b-2  ">
           <Vote />
           <div className="pb-3 w-full">
-            <Content
-              category={data?.category}
-              owner={data?.owner || ""}
-              title={data?.title || ""}
-              content={data?.content}
-              created_at={data?.created_at}
-            />
+            <Content {...data} />
             <div className="h-3 bg-red-300 rounded-full mt-5"></div>
           </div>
         </div>

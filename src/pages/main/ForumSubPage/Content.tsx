@@ -1,20 +1,15 @@
 import React from "react";
 import Moment from "react-moment";
+import { detailForumType } from "../../../constant/type/DataType";
 
-interface props {
-  category: string;
-  owner: string;
-  title: string;
-  content?: string;
-  created_at?: Date;
-}
-
-const Content = ({ ...props }: props) => {
+const Content = ({ ...props }: detailForumType) => {
   return (
     <div className="space-y-2">
       <div className="flex space-x-2 ">
         <h2 className="text-xs font-bold flex">s/{props.category}</h2>
-        <p className="text-xs ">. Posted by u/{props.owner}</p>
+        <p className="text-xs ">
+          . Posted by u/{props.alias || props.username}
+        </p>
         <Moment
           format="D MMM YYYY"
           date={props.created_at}
