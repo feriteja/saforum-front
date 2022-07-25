@@ -32,19 +32,24 @@ const Profile = () => {
     return <Navigate to="/notFound" replace />;
   }
 
+  console.log(data);
+
   return (
     <div className="min-h-screen px-4 bg-primary">
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <img
-            src={data?.avatar || avatar}
+            src={
+              "http://127.0.0.1:3003/public/tmp/" + (data?.avatar as string) ||
+              avatar
+            }
             alt="avatar"
             className="w-24 md:w-28 lg:w-32 mx-2"
           />
 
           {isOwner && (
             <button
-              onClick={() => navigate("/user/edit")}
+              onClick={() => navigate("/user/edit", { state: data })}
               className="self-start mt-3 border-2 border-primary bg-primary  px-3 py-1 rounded-full shadow "
             >
               Edit profile

@@ -1,7 +1,7 @@
 export interface UserType {
   username: string;
   role: "SUPERADMIN" | "USER";
-  avatar?: string;
+  avatar?: string | File;
   status?: string;
   forumown?: string[];
   alias?: string;
@@ -26,7 +26,7 @@ export interface ForumType {
   category: string;
 }
 export interface detailForumType extends Omit<ForumType, "comment"> {
-  username: string;
+  username?: string;
   alias?: string;
   comment?: CommentType[];
 }

@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../assets/avatar/avataaars.png";
+import { UserState } from "../../context/UserContext";
 
 const PostCard = () => {
   const navigate = useNavigate();
+  const { user } = UserState();
   const toProfile = () => {
-    navigate("/profile");
+    navigate(`/user/${user?.username}`);
   };
   const toPostPage = () => {
     navigate("/posting");

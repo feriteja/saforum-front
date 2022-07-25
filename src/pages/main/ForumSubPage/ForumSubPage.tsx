@@ -7,6 +7,7 @@ import {
   useParams,
 } from "react-router-dom";
 import { getForumDetail } from "../../../function/handler/forum/forum";
+import { BsChatLeft } from "react-icons/bs";
 
 import { UserState } from "../../../context/UserContext";
 import { SkeletonSubForum, Vote } from "../../../components";
@@ -42,7 +43,10 @@ const ForumSubPage = () => {
           <Vote />
           <div className="pb-3 w-full">
             <Content {...data} />
-            <div className="h-3 bg-red-300 rounded-full mt-5"></div>
+            <div className="flex items-center space-x-2 font-semibold text-sm text-secondary mt-5">
+              <BsChatLeft />
+              <p>{data.comment?.length || 0} comment</p>
+            </div>
           </div>
         </div>
       </div>

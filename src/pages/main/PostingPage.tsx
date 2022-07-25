@@ -50,7 +50,7 @@ const PostingPage = () => {
             name="title"
             onChange={(e) => setTitle(e.target.value)}
             placeholder="title"
-            className="w-full  border  border-primary rounded-md p-2 bg-primary focus:outline focus:outline-1"
+            className="w-full  border  border-primary rounded-md p-2 bg-primary shadow focus:outline focus:outline-1"
           />
 
           <textarea
@@ -59,8 +59,8 @@ const PostingPage = () => {
             id="content"
             rows={7}
             placeholder="content(optional)"
-            className="resize-none w-full rounded-md border focus:outline focus:outline-1 border-primary bg-primary p-2"
-          ></textarea>
+            className="resize-none w-full rounded-md shadow border focus:outline focus:outline-1 border-primary bg-primary p-2"
+          />
           <label
             htmlFor="countries"
             className="block mb-2 text-sm font-medium  text-gray-400"
@@ -71,7 +71,7 @@ const PostingPage = () => {
             id="countries"
             defaultValue={"PUBLIC"}
             onChange={(e) => setCategory(e.target.value)}
-            className="  rounded-md block w-full p-2.5 bg-primary border border-primary placeholder-gray-400  "
+            className="  rounded-md block w-full p-2.5 shadow bg-primary border border-primary placeholder-gray-400  "
           >
             <option aria-required disabled>
               Choose a category

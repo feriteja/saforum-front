@@ -6,8 +6,6 @@ const RequireAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const { user } = UserState();
   const location = useLocation();
 
-  console.log("masuk");
-
   if (!user) {
     return <Navigate to={"/signin"} state={{ from: location }} replace />;
   }
