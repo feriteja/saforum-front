@@ -18,8 +18,6 @@ const UserProvider: React.FC<any> = ({ children }) => {
     null
   );
 
-  const { pathname } = useLocation();
-
   const { decodedToken, isExpired } = useJwt(token?.access_token || "");
 
   useEffect(() => {

@@ -25,11 +25,8 @@ const getAllForum = async (category?: string) => {
   try {
     const res = await axios.request<ResponseAllForumType>({
       method: "get",
-      baseURL: "http://127.0.0.1:3003/api/forum",
+      baseURL: `http://127.0.0.1:3003/api/forum/${category}`,
       url: "/",
-      data: {
-        category,
-      },
     });
     return res.data.data;
   } catch (error) {

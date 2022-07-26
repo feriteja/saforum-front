@@ -35,7 +35,7 @@ function App() {
                 <div className="mx-auto max-w-5xl  ">
                   <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/forum">
+                    <Route path="/forum" element={<ForumPage />}>
                       <Route path=":category" element={<ForumPage />} />
                     </Route>
                     <Route path="forum/s/:forumID" element={<ForumSubPage />} />

@@ -14,13 +14,19 @@ const ProfileForum = () => {
   const { username } = useParams();
 
   const { isLoading, error, data } = useQuery(
-    ["profile", username],
+    ["profileForum", username],
     () => getUserForumByUsername(username || ""),
     { retry: 2 }
   );
 
   if (isLoading) {
-    return <SkeletonForum />;
+    return (
+      <div>
+        {[...Array(10).keys()].map((val, idx) => {
+          return <SkeletonForum key={`skeleton-${idx}`} />;
+        })}
+      </div>
+    );
   }
 
   if (error) {
@@ -35,7 +41,13 @@ const ProfileForum = () => {
     );
   }
 
-  return <div>{/* {data.map} */}</div>;
+  return (
+    <div className="space-y-4 mt-4">
+      {data.data.map((val, idx) => {
+        return <ForumCard data={val} key={`forum-${idx}`} />;
+      })}
+    </div>
+  );
 };
 
 export default ProfileForum;

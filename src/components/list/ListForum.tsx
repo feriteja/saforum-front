@@ -6,14 +6,12 @@ import { ForumCard, SkeletonForum } from "..";
 import { getAllForum } from "../../function/handler/forum/forum";
 
 const ListForum = () => {
-  const category = useParams();
+  const { category } = useParams();
   const {
     isLoading,
     error,
     data: forumList,
-  } = useQuery(["forumList", category.toString()], () =>
-    getAllForum(category.toString())
-  );
+  } = useQuery(["forumList", category], () => getAllForum(category));
 
   return (
     <div className="space-y-3">

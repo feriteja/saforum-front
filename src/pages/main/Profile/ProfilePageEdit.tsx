@@ -71,6 +71,7 @@ const ProfilePageEdit = () => {
           onChange={(txt) => setStatus(txt.target.value)}
           value={status}
           id="status"
+          maxLength={250}
           rows={7}
           placeholder="status(optional)"
           className="resize-none w-full rounded-md shadow border focus:outline focus:outline-1 border-primary bg-primary p-2"

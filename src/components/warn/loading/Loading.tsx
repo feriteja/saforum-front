@@ -5,7 +5,7 @@ const Loading = () => {
   const { isLoading } = systemState();
   return (
     <div
-      className={`absolute top-0 ${
+      className={`absolute top-0 left-0 right-0 ${
         isLoading ? "flex" : "hidden"
       } justify-center items-center  min-h-screen w-screen bg-slate-300/50 z-20`}
     >

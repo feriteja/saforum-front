@@ -9,6 +9,10 @@ interface ProfileResponseType {
   message: string;
   user: UserType;
 }
+interface ProfileForumResponseType {
+  message: string;
+  data: ForumType[];
+}
 
 interface UpdateUserProps {
   alias?: string;
@@ -50,7 +54,7 @@ const updateUser = async (formData: FormData, token: AuthTokenType) => {
 
 const getUserForumByUsername = async (username: string) => {
   try {
-    const res = await axios.request<ForumType[]>({
+    const res = await axios.request<ProfileForumResponseType>({
       method: "get",
       baseURL: "http://127.0.0.1:3003/api/user",
       url: `/${username}`,

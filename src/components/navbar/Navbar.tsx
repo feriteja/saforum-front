@@ -65,9 +65,9 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive ? "text-accent" : "text-primary"
               }
-              to={"/category"}
+              to={"/forum"}
             >
-              Category
+              Forum
             </NavLink>
           </li>
 
