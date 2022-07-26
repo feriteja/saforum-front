@@ -14,10 +14,9 @@ interface ProfileForumResponseType {
   data: ForumType[];
 }
 
-interface UpdateUserProps {
-  alias?: string;
-  status?: string;
-  avatar?: FormData;
+interface AllUserResponseType {
+  message: string;
+  data: UserType[];
 }
 
 const getUserDetailByUsername = async (username?: string) => {
@@ -63,4 +62,52 @@ const getUserForumByUsername = async (username: string) => {
   }
 };
 
-export { getUserDetailByUsername, updateUser, getUserForumByUsername };
+//! ADMINONLY
+const getAllUser = async (token: AuthTokenType, username?: string) => {
+  try {
+    const res = await axios.request<AllUserResponseType>({
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${token?.access_token}`,
+      },
+      url: `/user/`,
+      params: {
+        refresh_token: token?.refresh_token,
+        username,
+      },
+    });
+    return res.data.data;
+  } catch (error) {}
+};
+
+const changeUserRole = async (
+  token?: AuthTokenType | null,
+  uuid?: string,
+  role?: string
+) => {
+  try {
+    const res = await axios({
+      method: "patch",
+      headers: {
+        Authorization: `Bearer ${token?.access_token}`,
+      },
+      url: "/user/role",
+      data: {
+        refresh_token: token?.refresh_token,
+        uuid,
+        role,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export {
+  getUserDetailByUsername,
+  updateUser,
+  getUserForumByUsername,
+  getAllUser,
+  changeUserRole,
+};
