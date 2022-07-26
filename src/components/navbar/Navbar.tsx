@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdClose, MdMenu } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthTokenType } from "../../constant/type/DataType";
@@ -6,9 +6,12 @@ import { systemState } from "../../context/SystemContext";
 import { UserState } from "../../context/UserContext";
 import { signOutFunc } from "../../function/handler/auth/auth";
 import { useLocalStorage } from "usehooks-ts";
+import { ThemeState } from "../../context/ThemeContext";
+import { BiSun } from "react-icons/bi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
   const [token, setToken] = useLocalStorage<AuthTokenType | null>(
     "authToken",
     null
@@ -17,6 +20,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const { user, setUser } = UserState();
+  const { setTheme } = ThemeState();
 
   const handleNav = () => {
     setIsOpen((prev) => !prev);
@@ -34,6 +38,10 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    setTheme(isDark ? "dark" : "light");
+  }, [isDark]);
+
   const forceLogout = () => {
     setToken(null);
   };
@@ -46,7 +54,7 @@ const Navbar = () => {
             <h1 className="font-bold text-2xl z-40">SaForum</h1>
           </NavLink>
         </div>
-        <ul className="hidden sm:flex font-bold items-center text-center sm:text-sm md:text-base ">
+        <ul className="hidden sm:flex justify-center font-bold items-center text-center sm:text-sm md:text-base ">
           {/* <li className="mx-2">
             <button onClick={() => console.log(user, token)}>Show State user</button>
           </li> */}
@@ -95,6 +103,17 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="mx-2">
+                <button onClick={() => setIsDark((prev) => !prev)}>
+                  <div
+                    className={`flex ${
+                      isDark ? "justify-end " : "justify-start "
+                    } bg-accent w-12 p-1 rounded-full duration-1000 text-black`}
+                  >
+                    <BiSun />
+                  </div>
+                </button>
+              </li>
+              <li className="mx-2">
                 <button onClick={onLogout}>logout</button>
               </li>
             </>
@@ -104,7 +123,7 @@ const Navbar = () => {
         {/* <button className="" onClick={forceLogout}>
           forcelogout
         </button> */}
-        <button className="sm:hidden" onClick={handleNav}>
+        <button className="sm:hidden " onClick={handleNav}>
           {isOpen ? <MdClose size={28} /> : <MdMenu size={28} />}
         </button>
       </nav>
@@ -134,24 +153,64 @@ const Navbar = () => {
             <li onClick={handleNav}>Homepage</li>
           </NavLink>
           {!user ? (
-            <NavLink
-              to={"/signin"}
-              className={({ isActive }) =>
-                isActive ? "text-accent" : "text-primary"
-              }
-            >
-              <li onClick={handleNav}>SignIn</li>
-            </NavLink>
+            <>
+              <NavLink
+                to={`/forum/`}
+                className={({ isActive }) =>
+                  isActive ? "text-accent" : "text-primary"
+                }
+              >
+                <li onClick={handleNav}>Forum</li>
+              </NavLink>
+              <li className="mx-2">
+                <button onClick={() => setIsDark((prev) => !prev)}>
+                  <div
+                    className={`flex ${
+                      isDark ? "justify-end " : "justify-start "
+                    } bg-accent w-12 p-1 rounded-full duration-1000 text-black`}
+                  >
+                    <BiSun />
+                  </div>
+                </button>
+              </li>
+              <NavLink
+                to={"/signin"}
+                className={({ isActive }) =>
+                  isActive ? "text-accent" : "text-primary"
+                }
+              >
+                <li onClick={handleNav}>SignIn</li>
+              </NavLink>
+            </>
           ) : (
             <>
               <NavLink
-                to={"/profile"}
+                to={`/forum/`}
+                className={({ isActive }) =>
+                  isActive ? "text-accent" : "text-primary"
+                }
+              >
+                <li onClick={handleNav}>Forum</li>
+              </NavLink>
+              <NavLink
+                to={`/user/${user.username}`}
                 className={({ isActive }) =>
                   isActive ? "text-accent" : "text-primary"
                 }
               >
                 <li onClick={handleNav}>Profile</li>
               </NavLink>
+              <li className="mx-2">
+                <button onClick={() => setIsDark((prev) => !prev)}>
+                  <div
+                    className={`flex ${
+                      isDark ? "justify-end " : "justify-start "
+                    } bg-accent w-12 p-1 rounded-full duration-1000 text-black`}
+                  >
+                    <BiSun />
+                  </div>
+                </button>
+              </li>
               <li onClick={handleNav}>
                 <button onClick={onLogout}>Logout</button>
               </li>

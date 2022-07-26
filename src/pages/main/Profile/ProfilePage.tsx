@@ -52,7 +52,7 @@ const Profile = () => {
               <img
                 src={
                   (data.avatar &&
-                    `http://127.0.0.1:3003/public/tmp/${
+                    `${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${
                       data.avatar as string
                     }`) ||
                   avatar

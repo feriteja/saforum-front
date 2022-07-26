@@ -24,7 +24,7 @@ const getUserDetailByUsername = async (username?: string) => {
   try {
     const res = await axios.request<ProfileResponseType>({
       method: "get",
-      baseURL: "http://127.0.0.1:3003/api/user",
+      baseURL: "/user",
       url: `/detail/${username}`,
     });
 
@@ -38,7 +38,7 @@ const updateUser = async (formData: FormData, token: AuthTokenType) => {
   try {
     const res = await axios({
       method: "put",
-      baseURL: "http://127.0.0.1:3003/api/user",
+      baseURL: "/user",
       url: `/`,
       headers: {
         Authorization: `Bearer ${token.access_token}`,
@@ -56,7 +56,7 @@ const getUserForumByUsername = async (username: string) => {
   try {
     const res = await axios.request<ProfileForumResponseType>({
       method: "get",
-      baseURL: "http://127.0.0.1:3003/api/user",
+      baseURL: "/user",
       url: `/${username}`,
     });
     return res.data;

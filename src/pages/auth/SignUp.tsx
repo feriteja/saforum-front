@@ -27,6 +27,9 @@ const SignUp = () => {
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    if (password.length < 6) {
+      return setError("Password not valid");
+    }
 
     if (password !== confPassword) {
       return setError("Password doesn't match");
@@ -77,6 +80,7 @@ const SignUp = () => {
             placeHolder="***********"
           />
           <div className="h-3" />
+
           <input
             className="bg-button text-btnText w-full rounded-lg py-2 mt-8 font-bold  cursor-pointer"
             type="submit"

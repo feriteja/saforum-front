@@ -5,6 +5,7 @@ import {
   detailForumType,
   ForumType,
 } from "../../../constant/type/DataType";
+const urlWithProxy = "/api/vi";
 
 interface ResponseAllForumType {
   message: string;
@@ -25,11 +26,12 @@ const getAllForum = async (category?: string) => {
   try {
     const res = await axios.request<ResponseAllForumType>({
       method: "get",
-      baseURL: `http://127.0.0.1:3003/api/forum/${category}`,
-      url: "/",
+      // baseURL: `/forum/${category || ""}`,
+      url: `/forum/${category}`,
     });
     return res.data.data;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
@@ -38,8 +40,7 @@ const getForumDetail = async (forumId?: string) => {
   try {
     const res = await axios.request<ResponseDetilForumType>({
       method: "get",
-      baseURL: "http://127.0.0.1:3003/api/forum",
-      url: `/s/${forumId}`,
+      url: `forum/s/${forumId}`,
     });
     return res.data.data;
   } catch (error) {
@@ -57,8 +58,7 @@ const addForum = async ({
   try {
     const res = await axios({
       method: "post",
-      baseURL: "http://127.0.0.1:3003/api/forum",
-      url: "/add",
+      url: "/forum/add",
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
@@ -74,14 +74,14 @@ const updateForum = async (formData: FormData, token: AuthTokenType) => {
   try {
     const res = await axios({
       method: "put",
-      baseURL: "http://127.0.0.1:3003/api/forum",
-      url: `/update`,
+      url: `/forum/update`,
       headers: {
         Authorization: `Bearer ${token.access_token}`,
         "Content-type": "multipart/form-data",
       },
       data: formData,
     });
+    console.log("first");
     return true;
   } catch (error) {}
 };
@@ -90,8 +90,7 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
   try {
     const res = await axios({
       method: "patch",
-      baseURL: "http://127.0.0.1:3003/api/forum",
-      url: "/comment",
+      url: "/forum/comment",
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },

@@ -1,7 +1,7 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type themeProps = "dark" | "light";
-export type contextProps = {
+export type themeContextProps = {
   setTheme: React.Dispatch<React.SetStateAction<themeProps>>;
   theme: themeProps;
 };
@@ -22,7 +22,7 @@ const getInitialTheme = (): themeProps => {
   return "light";
 };
 
-const ThemeContext = createContext<Partial<contextProps>>({});
+const ThemeContext = createContext<Partial<themeContextProps>>({});
 
 const ThemeProvider: React.FC<{
   initialTheme?: themeProps;
@@ -53,4 +53,8 @@ const ThemeProvider: React.FC<{
   );
 };
 
-export { ThemeContext, ThemeProvider };
+const ThemeState = () => {
+  return useContext(ThemeContext) as themeContextProps;
+};
+
+export { ThemeContext, ThemeProvider, ThemeState };

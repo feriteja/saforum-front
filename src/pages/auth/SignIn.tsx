@@ -26,6 +26,9 @@ const signIn = () => {
 
   const onSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    if (password.length < 6) {
+      return setError("Password not valid");
+    }
 
     try {
       showLoading(true);

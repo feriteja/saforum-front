@@ -1,26 +1,28 @@
-import { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Loading, Navbar, SnackBar } from "./components";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CookiesProvider } from "react-cookie";
+import { SystemProvider } from "./context/SystemContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { SignIn, SignUp } from "./pages/auth";
+import { UserProvider } from "./context/UserContext";
+import { RequireAuth } from "./function/handler/route/ProtectedRoute";
+import { AdminDashboard, AppLogPage } from "./pages/admin";
+import { ForgotPassword, SignIn, SignUp } from "./pages/auth";
 import {
   EditForumSub,
   ForumPage,
   ForumSubPage,
   HomePage,
   PostingPage,
-  ProfileActivity,
-  ProfileForum,
   ProfilePage,
   ProfilePageEdit,
 } from "./pages/main";
-import { UserProvider } from "./context/UserContext";
 import { NotFound } from "./pages/warn";
-import { SystemProvider } from "./context/SystemContext";
-import { CookiesProvider } from "react-cookie";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { RequireAuth } from "./function/handler/route/ProtectedRoute";
+import About from "./pages/warn/About";
+import axios from "axios";
+
+axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL + "/api";
 
 const queryClient = new QueryClient();
 
@@ -56,7 +58,13 @@ function App() {
                     <Route path="/posting" element={<PostingPage />} />
                     <Route path="/signin" element={<SignIn />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="notFound" element={<NotFound />} />
+                    <Route path="/forgot" element={<ForgotPassword />} />
+                    <Route path="admin">
+                      <Route path="" element={<AdminDashboard />} />
+                      <Route path="app-log" element={<AppLogPage />} />
+                    </Route>
+                    <Route path="/about" element={<About />} />
+                    <Route path="/notFound" element={<NotFound />} />
                     <Route
                       path="/*"
                       element={<Navigate to="/notFound" replace />}

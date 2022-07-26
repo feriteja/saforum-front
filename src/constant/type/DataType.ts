@@ -1,12 +1,13 @@
 export interface UserType {
   username: string;
-  role: "SUPERADMIN" | "USER";
+  role: "superadmin" | "admin" | "user";
   avatar?: string | File;
   status?: string;
   forumown?: string[];
   alias?: string;
   uuid: string;
   created_at?: Date;
+  state?: "banned" | "free";
 }
 
 export interface AuthTokenType {

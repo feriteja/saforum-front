@@ -36,9 +36,11 @@ const Content = ({ ...props }: detailForumType) => {
       <h1 className="font-semibold text-xl">{props.title}</h1>
       {props.banner && (
         <img
-          src={`http://127.0.0.1:3003/public/tmp/${props.banner}`}
+          src={`${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${
+            props.banner
+          }`}
           alt="banner"
-          className="w-10/12 h-96 mx-auto rounded"
+          className="w-10/12 h-48 md:h-72 lg:h-96 mx-auto rounded"
         />
       )}
       <p>{props.content}</p>

@@ -19,7 +19,9 @@ const PostCard = () => {
         <img
           src={
             (user?.avatar &&
-              `http://127.0.0.1:3003/public/tmp/${user.avatar as string}`) ||
+              `${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${
+                user.avatar as string
+              }`) ||
             avatar
           }
           alt="avatar"

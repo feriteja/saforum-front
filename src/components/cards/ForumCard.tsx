@@ -43,9 +43,11 @@ const ForumCard = (data: { data: ForumType }) => {
       <h1 className="font-semibold text-lg">{data.data.title}</h1>
       {data.data.banner && (
         <img
-          src={`http://127.0.0.1:3003/public/tmp/${data.data.banner}`}
+          src={`${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${
+            data.data.banner
+          }`}
           alt="banner"
-          className="w-11/12 h-40 mx-auto rounded"
+          className="w-11/12 h-72  mx-auto rounded"
         />
       )}
 
