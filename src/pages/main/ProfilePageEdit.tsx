@@ -52,20 +52,31 @@ const ProfilePageEdit = () => {
         encType="multipart/form-data"
         className="flex flex-col space-y-3 mt-6 bg-primary px-6 py-6 rounded "
       >
+        <label htmlFor="avatar" className="font-semibold">
+          Avatar
+        </label>
         <input
           type="file"
           name="avatar"
+          id="avatar"
           accept="image/*"
           multiple={false}
           onChange={(img) => setAvatar(img.target.files[0])}
         />
+        <label htmlFor="alias" className="font-semibold">
+          Alias
+        </label>
         <input
           type="text"
+          id="alias"
           name="alias"
           onChange={(txt) => setAlias(txt.target.value)}
           placeholder={alias}
           className="w-full  border  border-primary rounded-md p-2 bg-primary shadow focus:outline focus:outline-1"
         />
+        <label htmlFor="status" className="font-semibold">
+          Status
+        </label>
         <textarea
           name="status"
           onChange={(txt) => setStatus(txt.target.value)}

@@ -12,7 +12,7 @@ const ForumCard = (data: { data: ForumType }) => {
 
   return (
     <div
-      onClick={() => navigate(`/forum/s/${data.data.fuid}`)}
+      onClick={() => navigate(`/forum/f/${data.data.fuid}`)}
       className="px-2 py-4 bg-primary shadow-md rounded-md space-y-2 cursor-pointer hover:outline outline-1 outline-slate-500  "
     >
       <div className="flex justify-between">
@@ -54,8 +54,8 @@ const ForumCard = (data: { data: ForumType }) => {
       <div className=" line-clamp-6">
         <p>{data.data.content}</p>
       </div>
-      <div className="flex items-center">
-        <div className="flex justify-evenly   w-1/12 ">
+      <div className="flex items-center space-x-4">
+        <div className="flex justify-evenly space-x-2    ">
           <BiUpvote size={18} />
           <BiDownvote size={18} />
         </div>

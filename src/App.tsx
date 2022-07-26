@@ -40,12 +40,12 @@ function App() {
                     <Route path="/" element={<HomePage />} />
 
                     <Route path="/forum" element={<ForumPage />}>
-                      <Route path="f/:category" element={<ForumPage />} />
+                      <Route path="s/:category" element={<ForumPage />} />
                     </Route>
 
                     <Route path="/forum/edit" element={<EditForumSub />} />
 
-                    <Route path="forum/s/:forumID" element={<ForumSubPage />} />
+                    <Route path="forum/f/:forumID" element={<ForumSubPage />} />
 
                     <Route path="/user/">
                       <Route path=":username" element={<ProfilePage />} />

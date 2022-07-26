@@ -25,8 +25,6 @@ const Profile = () => {
     { retry: 1 }
   );
 
-  const { pathname } = useLocation();
-
   const isOwner = data?.uuid === user?.uuid;
 
   const navigate = useNavigate();

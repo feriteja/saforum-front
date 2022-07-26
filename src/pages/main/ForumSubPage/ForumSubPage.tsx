@@ -41,7 +41,7 @@ const ForumSubPage = () => {
       <div className="relative  px-3 py-6 top-5 bg-primary  shadow rounded  ">
         <div className="flex border-b-2  ">
           <Vote />
-          <div className="pb-3 w-full">
+          <div className="pb-3 w-full ">
             <Content {...data} />
             <div className="flex items-center space-x-2 font-semibold text-sm text-secondary mt-5">
               <BsChatLeft />

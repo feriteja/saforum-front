@@ -53,21 +53,32 @@ function EditForumSub() {
         encType="multipart/form-data"
         className="flex flex-col space-y-3 mt-6 bg-primary px-6 py-6 rounded "
       >
+        <label htmlFor="banner" className="font-semibold">
+          Banner
+        </label>
         <input
+          id="banner"
           type="file"
           name="banner"
           accept="image/*"
           multiple={false}
           onChange={(img) => setBanner(img.target.files[0])}
         />
+        <label htmlFor="title" className="font-semibold">
+          Title
+        </label>
         <input
           type="text"
+          id="title"
           name="title"
           value={title}
           onChange={(txt) => setTitle(txt.target.value)}
           placeholder={state.title}
           className="w-full  border  border-primary rounded-md p-2 bg-primary shadow focus:outline focus:outline-1"
         />
+        <label htmlFor="Content" className="font-semibold">
+          Content
+        </label>
         <textarea
           name="content"
           onChange={(txt) => setContent(txt.target.value)}

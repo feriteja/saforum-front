@@ -1,5 +1,5 @@
 import React from "react";
-import { BsGear } from "react-icons/bs";
+import { BsGear, BsThreeDots } from "react-icons/bs";
 import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
 import { detailForumType } from "../../../constant/type/DataType";
@@ -21,17 +21,17 @@ const Content = ({ ...props }: detailForumType) => {
             className="text-xs "
           />
         </div>
-        <button
-          onClick={() => navigate("/forum/edit", { state: props })}
-          className=" p-2 group"
-        >
-          {user?.username === props.username && (
-            <BsGear
+        {user?.username === props.username && (
+          <button
+            onClick={() => navigate("/forum/edit", { state: props })}
+            className=" p-2 group"
+          >
+            <BsThreeDots
               size={20}
               className="text-gray-400 group-hover:text-primary"
             />
-          )}
-        </button>
+          </button>
+        )}
       </div>
       <h1 className="font-semibold text-xl">{props.title}</h1>
       {props.banner && (

@@ -8,6 +8,7 @@ import { signOutFunc } from "../../function/handler/auth/auth";
 import { useLocalStorage } from "usehooks-ts";
 import { ThemeState } from "../../context/ThemeContext";
 import { BiSun } from "react-icons/bi";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,10 +50,20 @@ const Navbar = () => {
   return (
     <>
       <nav className=" flex items-center justify-between h-16 bg-primary shadow-xl  z-10 w-full px-2 sm:px-4 md:px-6 ">
-        <div className="flex items-center ">
+        <div className="flex items-baseline  space-x-3 ">
           <NavLink to={"/"}>
             <h1 className="font-bold text-2xl z-40">SaForum</h1>
           </NavLink>
+          {(user?.role === "admin" || user?.role === "superadmin") && (
+            <NavLink
+              to={"/admin/"}
+              className={({ isActive }) =>
+                isActive ? "text-accent" : "text-primary"
+              }
+            >
+              <h1 className="font-bold text-lg z-40">Dashboard</h1>
+            </NavLink>
+          )}
         </div>
         <ul className="hidden sm:flex justify-center font-bold items-center text-center sm:text-sm md:text-base ">
           {/* <li className="mx-2">
@@ -129,95 +140,14 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile */}
-
-      <div
-        onClick={() => setIsOpen(false)}
-        className={`${
-          isOpen ? " bg-black/30 " : "bg-black/0 -z-20 "
-        } absolute h-full w-full`}
+      <MobileNav
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        handleNav={handleNav}
+        setIsDark={setIsDark}
+        isDark={isDark}
+        onLogout={onLogout}
       />
-      <div
-        className={
-          isOpen
-            ? "fixed   right-0 top-16 bg-secondary w-[75%] h-full px-4 py-4 z-50 opacity-100 ease-in duration-300 "
-            : "fixed  right-[-100%] top-16   bg-secondary  w-[75%] h-full opacity-0 ease-in duration-300 "
-        }
-      >
-        <ul className="font-bold flex flex-col justify-evenly h-40">
-          <NavLink
-            to={"/"}
-            className={({ isActive }) =>
-              isActive ? "text-accent" : "text-primary"
-            }
-          >
-            <li onClick={handleNav}>Homepage</li>
-          </NavLink>
-          {!user ? (
-            <>
-              <NavLink
-                to={`/forum/`}
-                className={({ isActive }) =>
-                  isActive ? "text-accent" : "text-primary"
-                }
-              >
-                <li onClick={handleNav}>Forum</li>
-              </NavLink>
-              <li className="mx-2">
-                <button onClick={() => setIsDark((prev) => !prev)}>
-                  <div
-                    className={`flex ${
-                      isDark ? "justify-end " : "justify-start "
-                    } bg-accent w-12 p-1 rounded-full duration-1000 text-black`}
-                  >
-                    <BiSun />
-                  </div>
-                </button>
-              </li>
-              <NavLink
-                to={"/signin"}
-                className={({ isActive }) =>
-                  isActive ? "text-accent" : "text-primary"
-                }
-              >
-                <li onClick={handleNav}>SignIn</li>
-              </NavLink>
-            </>
-          ) : (
-            <>
-              <NavLink
-                to={`/forum/`}
-                className={({ isActive }) =>
-                  isActive ? "text-accent" : "text-primary"
-                }
-              >
-                <li onClick={handleNav}>Forum</li>
-              </NavLink>
-              <NavLink
-                to={`/user/${user.username}`}
-                className={({ isActive }) =>
-                  isActive ? "text-accent" : "text-primary"
-                }
-              >
-                <li onClick={handleNav}>Profile</li>
-              </NavLink>
-              <li className="mx-2">
-                <button onClick={() => setIsDark((prev) => !prev)}>
-                  <div
-                    className={`flex ${
-                      isDark ? "justify-end " : "justify-start "
-                    } bg-accent w-12 p-1 rounded-full duration-1000 text-black`}
-                  >
-                    <BiSun />
-                  </div>
-                </button>
-              </li>
-              <li onClick={handleNav}>
-                <button onClick={onLogout}>Logout</button>
-              </li>
-            </>
-          )}
-        </ul>
-      </div>
     </>
   );
 };

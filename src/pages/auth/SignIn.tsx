@@ -79,6 +79,12 @@ const signIn = () => {
             value={"Sign In"}
           />
         </form>
+        <p
+          onClick={() => navigate("/forgot")}
+          className="my-2 mb-4 text-center"
+        >
+          forgot passoword ?
+        </p>
         <p className="text-sm mt-2 text-right">
           New to <b>SaForum?, </b>
           <Link className="text-blue-400" to={"/signUp"}>
