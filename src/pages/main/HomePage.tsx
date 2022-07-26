@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
+import { useLocalStorage } from "usehooks-ts";
 import { ListForum, PostCard, SideBar } from "../../components";
-import { UserType } from "../../constant/type/DataType";
+import { AuthTokenType, UserType } from "../../constant/type/DataType";
 import { UserState } from "../../context/UserContext";
 import { getUserDetailByUsername } from "../../function/handler/user/userhandler";
 
 const HomePage = () => {
   const { user, setUser } = UserState();
+
   const { data } = useQuery(["user"], () =>
     getUserDetailByUsername(user?.username)
   );

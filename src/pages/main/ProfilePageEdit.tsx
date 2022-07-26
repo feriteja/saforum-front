@@ -3,9 +3,9 @@ import React, { SyntheticEvent, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "usehooks-ts";
 import avatar from "../../../assets/avatar/avataaars.png";
-import { AuthTokenType, UserType } from "../../../constant/type/DataType";
-import { systemState } from "../../../context/SystemContext";
-import { updateUser } from "../../../function/handler/user/userhandler";
+import { AuthTokenType, UserType } from "../../constant/type/DataType";
+import { systemState } from "../../context/SystemContext";
+import { updateUser } from "../../function/handler/user/userhandler";
 
 const ProfilePageEdit = () => {
   const state = useLocation().state as UserType;
@@ -46,11 +46,11 @@ const ProfilePageEdit = () => {
   }
 
   return (
-    <div className="bg-primary py-8 px-6 ">
+    <div className="py-8 px-6 ">
       <form
         onSubmit={onSubmit}
         encType="multipart/form-data"
-        className="flex flex-col space-y-3 "
+        className="flex flex-col space-y-3 mt-6 bg-primary px-6 py-6 rounded "
       >
         <input
           type="file"

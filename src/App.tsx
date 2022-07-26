@@ -5,6 +5,7 @@ import { Loading, Navbar, SnackBar } from "./components";
 import { ThemeProvider } from "./context/ThemeContext";
 import { SignIn, SignUp } from "./pages/auth";
 import {
+  EditForumSub,
   ForumPage,
   ForumSubPage,
   HomePage,
@@ -35,9 +36,13 @@ function App() {
                 <div className="mx-auto max-w-5xl  ">
                   <Routes>
                     <Route path="/" element={<HomePage />} />
+
                     <Route path="/forum" element={<ForumPage />}>
-                      <Route path=":category" element={<ForumPage />} />
+                      <Route path="f/:category" element={<ForumPage />} />
                     </Route>
+
+                    <Route path="/forum/edit" element={<EditForumSub />} />
+
                     <Route path="forum/s/:forumID" element={<ForumSubPage />} />
 
                     <Route path="/user/">

@@ -29,7 +29,14 @@ const ForumCard = (data: { data: ForumType }) => {
           <h2 className="font-semibold text-sm capitalize">
             s/{data.data.category.toLowerCase()}
           </h2>
-          {user?.username === data.data.owner && <BsGear />}
+          <div className=" p-2 group">
+            {user?.username === data.data.owner && (
+              <BsGear
+                size={20}
+                className="text-gray-400 group-hover:text-primary"
+              />
+            )}
+          </div>
         </div>
       </div>
 

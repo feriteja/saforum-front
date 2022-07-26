@@ -70,6 +70,22 @@ const addForum = async ({
   }
 };
 
+const updateForum = async (formData: FormData, token: AuthTokenType) => {
+  try {
+    const res = await axios({
+      method: "put",
+      baseURL: "http://127.0.0.1:3003/api/forum",
+      url: `/update`,
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+        "Content-type": "multipart/form-data",
+      },
+      data: formData,
+    });
+    return true;
+  } catch (error) {}
+};
+
 const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
   try {
     const res = await axios({
@@ -91,4 +107,4 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
   }
 };
 
-export { addForum, getAllForum, getForumDetail, addComment };
+export { addForum, getAllForum, getForumDetail, addComment, updateForum };
