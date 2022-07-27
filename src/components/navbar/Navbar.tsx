@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdClose, MdMenu } from "react-icons/md";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthTokenType } from "../../constant/type/DataType";
 import { systemState } from "../../context/SystemContext";
 import { UserState } from "../../context/UserContext";
@@ -9,6 +9,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { ThemeState } from "../../context/ThemeContext";
 import { BiSun } from "react-icons/bi";
 import MobileNav from "./MobileNav";
+import SearchNav from "../search/SearchNav";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,6 +80,16 @@ const Navbar = () => {
           {/* <li className="mx-2">
             <button onClick={() => console.log(user, token)}>Show State user</button>
           </li> */}
+          <li className="mx-2">
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-accent" : "text-primary"
+              }
+              to={"/search"}
+            >
+              <SearchNav />
+            </NavLink>
+          </li>
           <li className="mx-2">
             <NavLink
               className={({ isActive }) =>

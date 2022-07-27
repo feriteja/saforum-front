@@ -19,7 +19,7 @@ import {
   noLikeForum,
 } from "../../function/handler/forum/forum";
 
-const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
+const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
   const { user } = UserState();
   const [isLiked, setIsLiked] = useState(
     data.like_by?.includes(user?.uuid as string)
@@ -173,7 +173,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
         </div>
       </div>
 
-      <h1 className="font-semibold text-lg">{data.title}</h1>
+      <h1 className="font-semibold text-xl">{data.title}</h1>
       {data.banner && (
         <img
           src={`${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${data.banner}`}
@@ -182,7 +182,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
         />
       )}
 
-      <div className=" line-clamp-6">
+      <div className={`${data.banner ? "line-clamp-2" : "line-clamp-6"}`}>
         <p>{data.content}</p>
       </div>
       <div className="flex items-center space-x-4">
@@ -190,9 +190,9 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
           <BiUpvote
             onClick={onLike}
             size={18}
-            className={`${isLiked ? "text-accent" : ""}`}
+            className={`${isLiked ? "text-accent" : ""} cursor-pointer`}
           />
-          <BiDownvote onClick={onNoLike} size={18} />
+          <BiDownvote className="cursor-pointer" onClick={onNoLike} size={18} />
         </div>
         <p>{data.comment || 0} comment</p>
       </div>

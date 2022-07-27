@@ -1,23 +1,15 @@
 import React from "react";
+import ForumPopularCard from "../cards/ForumPopularCard";
+import SkeletonSideCard from "../skeleton/SkeletonSideCard";
 
 const sidebar = () => {
   return (
     <div className="space-y-3 w-full ">
-      <div className=" flex justify-center flex-1 items-center h-52 w-full bg-slate-300 animate-pulse rounded-md">
-        <h1>No data yet</h1>
-      </div>
-      <div className=" flex justify-center items-center h-20 w-full bg-slate-300 animate-pulse rounded-md">
-        <h1>No data yet</h1>
-      </div>
-      <div className=" flex justify-center items-center h-36 w-full bg-slate-300 animate-pulse rounded-md">
-        <h1>No data yet</h1>
-      </div>
-      <div className=" flex justify-center items-center h-64 w-full bg-slate-300 animate-pulse rounded-md">
-        <h1>No data yet</h1>
-      </div>
-      <div className=" flex justify-center items-center h-10 w-full bg-slate-300 animate-pulse rounded-md">
-        <h1>No data yet</h1>
-      </div>
+      <ForumPopularCard />
+      <SkeletonSideCard />
+      <SkeletonSideCard number={4} />
+      <SkeletonSideCard number={7} />
+      <SkeletonSideCard number={3} />
     </div>
   );
 };

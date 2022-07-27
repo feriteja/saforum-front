@@ -6,4 +6,5 @@ export { default as ProfileForum } from "./Profile/ProfileForum";
 export { default as PostingPage } from "./PostingPage";
 export { default as ForumPage } from "./ForumPage";
 export { default as EditForumSub } from "./EditForumSub";
+export { default as SearchPage } from "./SearchPage";
 export { default as ForumSubPage } from "./ForumSubPage/ForumSubPage";

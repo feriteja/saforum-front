@@ -13,6 +13,7 @@ const ForumPage = () => {
     isLoading,
     error,
     data: forumList,
+    refetch,
   } = useQuery(["forumList", category], () => getAllForum(category));
 
   if (category) {
@@ -25,10 +26,10 @@ const ForumPage = () => {
     }
 
     return (
-      <div>
-        <div className="space-y-3 mt-3">
+      <div className="py-5">
+        <div className="space-y-3 ">
           {forumList?.map((data, idx) => {
-            return <ForumCard data={data} key={data.fuid} />;
+            return <ForumCard refetch={refetch} data={data} key={data.fuid} />;
           })}
         </div>
       </div>
@@ -36,8 +37,8 @@ const ForumPage = () => {
   }
 
   return (
-    <div className="">
-      <div className="space-y-3 mt-3">
+    <div className="py-5">
+      <div className="space-y-3 ">
         {categoryList.map((val, idx) => {
           return <CategoryCard key={val} value={val} />;
         })}

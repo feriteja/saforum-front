@@ -17,6 +17,7 @@ import {
   PostingPage,
   ProfilePage,
   ProfilePageEdit,
+  SearchPage,
 } from "./pages/main";
 import { NotFound } from "./pages/warn";
 import About from "./pages/warn/About";
@@ -38,6 +39,7 @@ function App() {
                 <div className="mx-auto max-w-5xl  ">
                   <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/search" element={<SearchPage />} />
 
                     <Route path="/forum" element={<ForumPage />}>
                       <Route path="s/:category" element={<ForumPage />} />

@@ -7,7 +7,7 @@ import {
 } from "../../../constant/type/DataType";
 const urlWithProxy = "/api/vi";
 
-interface ResponseAllForumType {
+interface ResponseForumType {
   message: string;
   data: ForumType[];
 }
@@ -24,7 +24,7 @@ interface AddCommentProps {
 
 const getAllForum = async (category?: string) => {
   try {
-    const res = await axios.request<ResponseAllForumType>({
+    const res = await axios.request<ResponseForumType>({
       method: "get",
       url: `/forum/`,
       params: {
@@ -34,6 +34,18 @@ const getAllForum = async (category?: string) => {
     return res.data.data;
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+};
+
+const getPopularForum = async () => {
+  try {
+    const res = axios.request<ResponseForumType>({
+      method: "get",
+      url: "/forum/popular",
+    });
+    return (await res).data.data;
+  } catch (error) {
     throw error;
   }
 };
@@ -48,6 +60,17 @@ const getForumDetail = async (forumId?: string) => {
   } catch (error) {
     throw error;
   }
+};
+
+const getSearchForum = async (title: string) => {
+  try {
+    const res = await axios.request<ResponseForumType>({
+      method: "get",
+      url: "/forum/search",
+      params: { userInput: title },
+    });
+    return res.data.data;
+  } catch (error) {}
 };
 
 const addForum = async ({
@@ -184,4 +207,6 @@ export {
   deleteForum,
   likeForum,
   noLikeForum,
+  getPopularForum,
+  getSearchForum,
 };
