@@ -24,8 +24,8 @@ export interface ForumType {
   content?: string;
   comment?: number;
   view_count?: number;
-  like_count?: number;
   category: string;
+  like_by: string[];
 }
 export interface detailForumType extends Omit<ForumType, "comment"> {
   username?: string;
@@ -54,4 +54,15 @@ export enum categoryType {
   automotive = "AUTOMOTIVE",
   sports = "SPORTS",
   news = "NEWS",
+}
+
+export interface AppLogType {
+  logID: string;
+  activity?: string;
+  status?: "success" | "failed";
+  time?: Date;
+  role?: "user" | "admin" | "superadmin";
+  username?: string;
+  target?: string;
+  detail?: string;
 }

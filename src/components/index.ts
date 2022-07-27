@@ -11,3 +11,4 @@ export { default as SkeletonSubForum } from "./skeleton/SkeletonSubForum";
 export { default as SkeletonCommentCard } from "./skeleton/SkeletonCommentCard";
 export { default as SideBar } from "./sidebar/sidebar";
 export { default as Vote } from "./vote/Vote";
+export { default as Footer } from "./footer/Footer";

@@ -13,10 +13,17 @@ import Moment from "react-moment";
 import { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
 import { systemState } from "../../context/SystemContext";
 import { useLocalStorage } from "usehooks-ts";
-import { deleteForum } from "../../function/handler/forum/forum";
+import {
+  deleteForum,
+  likeForum,
+  noLikeForum,
+} from "../../function/handler/forum/forum";
 
 const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
   const { user } = UserState();
+  const [isLiked, setIsLiked] = useState(
+    data.like_by?.includes(user?.uuid as string)
+  );
   const { showLoading, showSnackbar } = systemState();
   const [isOption, setIsOption] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -50,6 +57,46 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
       throw error;
     }
   };
+
+  const onLike = async (e: SyntheticEvent) => {
+    e.stopPropagation();
+    if (isLiked) return;
+    if (!token) return navigate("/signin");
+
+    try {
+      setIsLiked(true);
+      await likeForum(
+        data?.fuid || "",
+        user?.uuid || "",
+        token as AuthTokenType
+      );
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const onNoLike = async (e: SyntheticEvent) => {
+    e.stopPropagation();
+    if (!isLiked) return;
+    if (!token) return navigate("/signin");
+
+    try {
+      setIsLiked(false);
+      await noLikeForum(
+        data?.fuid || "",
+        user?.uuid || "",
+        token as AuthTokenType
+      );
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    setIsLiked(data.like_by?.includes(user?.uuid as string));
+
+    return () => {};
+  }, [user]);
 
   useEffect(() => {
     function handleClickOutside(event: any) {
@@ -140,8 +187,12 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
       </div>
       <div className="flex items-center space-x-4">
         <div className="flex justify-evenly space-x-2    ">
-          <BiUpvote size={18} />
-          <BiDownvote size={18} />
+          <BiUpvote
+            onClick={onLike}
+            size={18}
+            className={`${isLiked ? "text-accent" : ""}`}
+          />
+          <BiDownvote onClick={onNoLike} size={18} />
         </div>
         <p>{data.comment || 0} comment</p>
       </div>

@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ForumCard, SkeletonForum } from "..";
+import { UserState } from "../../context/UserContext";
 
 import { getAllForum } from "../../function/handler/forum/forum";
 
 const ListForum = () => {
+  const { user } = UserState();
   const { category } = useParams();
   const {
     isLoading,

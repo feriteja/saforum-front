@@ -3,7 +3,7 @@ import Moment from "react-moment";
 import { AuthTokenType, UserType } from "../../../constant/type/DataType";
 import { systemState } from "../../../context/SystemContext";
 import { UserState } from "../../../context/UserContext";
-import { changeUserRole } from "../../../function/handler/user/userhandler";
+import { changeUserRole } from "../../../function/handler/admin/adminhandler";
 
 interface props {
   data: UserType;
@@ -36,7 +36,6 @@ const TableRow = (props: props) => {
       </th>
       <td className="py-4 px-6 hidden md:block">{props.data.uuid} </td>
       <td className="py-4 px-6">
-        {" "}
         <Moment
           format="D MMM YYYY"
           date={props.data.created_at}

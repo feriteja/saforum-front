@@ -7,7 +7,8 @@ import React, {
 import { BiSearch } from "react-icons/bi";
 import { useLocalStorage } from "usehooks-ts";
 import { AuthTokenType, UserType } from "../../../constant/type/DataType";
-import { getAllUser } from "../../../function/handler/user/userhandler";
+import { getAllUser } from "../../../function/handler/admin/adminhandler";
+
 import TableRow from "./TableRow";
 
 const TableUser = () => {

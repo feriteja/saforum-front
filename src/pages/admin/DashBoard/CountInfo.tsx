@@ -3,7 +3,7 @@ import React from "react";
 import { MdOutlineForum, MdOutlinePerson } from "react-icons/md";
 import { useLocalStorage } from "usehooks-ts";
 import { AuthTokenType } from "../../../constant/type/DataType";
-import { getNumberUserForum } from "../../../function/handler/user/userhandler";
+import { getNumberUserForum } from "../../../function/handler/admin/adminhandler";
 
 interface props {
   userCount?: number;

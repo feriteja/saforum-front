@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Loading, Navbar, SnackBar } from "./components";
+import { Footer, Loading, Navbar, SnackBar } from "./components";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CookiesProvider } from "react-cookie";

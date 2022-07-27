@@ -26,8 +26,10 @@ const getAllForum = async (category?: string) => {
   try {
     const res = await axios.request<ResponseAllForumType>({
       method: "get",
-      // baseURL: `/forum/${category || ""}`,
-      url: `/forum/${category}`,
+      url: `/forum/`,
+      params: {
+        category,
+      },
     });
     return res.data.data;
   } catch (error) {
@@ -125,6 +127,54 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
   }
 };
 
+const likeForum = async (
+  forumID: string,
+  userID: string,
+  token: AuthTokenType
+) => {
+  try {
+    const res = await axios({
+      method: "post",
+      url: "/forum/like",
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+      },
+      data: {
+        refresh_token: token.refresh_token,
+        forumID,
+        userID,
+      },
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const noLikeForum = async (
+  forumID: string,
+  userID: string,
+  token: AuthTokenType
+) => {
+  try {
+    const res = await axios({
+      method: "post",
+      url: "/forum/nolike",
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+      },
+      data: {
+        refresh_token: token.refresh_token,
+        forumID,
+        userID,
+      },
+    });
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   addForum,
   getAllForum,
@@ -132,4 +182,6 @@ export {
   addComment,
   updateForum,
   deleteForum,
+  likeForum,
+  noLikeForum,
 };
