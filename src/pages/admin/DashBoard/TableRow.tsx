@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Moment from "react-moment";
 import { AuthTokenType, UserType } from "../../../constant/type/DataType";
+import { systemState } from "../../../context/SystemContext";
 import { UserState } from "../../../context/UserContext";
 import { changeUserRole } from "../../../function/handler/user/userhandler";
 
@@ -12,12 +13,18 @@ interface props {
 const TableRow = (props: props) => {
   const { user } = UserState();
   const [role, setRole] = useState<string>(props.data.role);
+  const { showLoading, showSnackbar } = systemState();
 
   const onChange = async (userRole: string) => {
     try {
+      showLoading(true);
       setRole(userRole);
       await changeUserRole(props?.token, props.data.uuid, userRole);
+      showLoading(false);
+      showSnackbar(`${props.data.username} is ${userRole} now`);
     } catch (error) {
+      showLoading(false);
+      showSnackbar("Failed to change user role");
       throw error;
     }
   };
@@ -27,7 +34,7 @@ const TableRow = (props: props) => {
       <th scope="row" className="py-4 px-6 font-medium  whitespace-nowrap ">
         {props.data.username}
       </th>
-      <td className="py-4 px-6">{props.data.uuid} </td>
+      <td className="py-4 px-6 hidden md:block">{props.data.uuid} </td>
       <td className="py-4 px-6">
         {" "}
         <Moment
@@ -48,6 +55,9 @@ const TableRow = (props: props) => {
           <option value="user">user</option>
           <option value="admin" className="disabled:bg-gray-400 ">
             admin
+          </option>
+          <option value="superadmin" disabled className="bg-gray-300">
+            super
           </option>
         </select>
       </td>

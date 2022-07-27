@@ -8,6 +8,12 @@ import { UserState } from "../../../context/UserContext";
 const Content = ({ ...props }: detailForumType) => {
   const { user } = UserState();
   const navigate = useNavigate();
+
+  const authority =
+    user?.username === props.username ||
+    user?.role === "admin" ||
+    user?.role === "superadmin";
+
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
@@ -21,7 +27,7 @@ const Content = ({ ...props }: detailForumType) => {
             className="text-xs "
           />
         </div>
-        {user?.username === props.username && (
+        {authority && (
           <button
             onClick={() => navigate("/forum/edit", { state: props })}
             className=" p-2 group"

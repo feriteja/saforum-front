@@ -70,6 +70,25 @@ const addForum = async ({
   }
 };
 
+const deleteForum = async (forumID: string, token: AuthTokenType) => {
+  try {
+    const res = await axios({
+      method: "delete",
+      url: "/forum/delete",
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+      },
+      data: {
+        refresh_token: token.refresh_token,
+        forumID,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const updateForum = async (formData: FormData, token: AuthTokenType) => {
   try {
     const res = await axios({
@@ -106,4 +125,11 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
   }
 };
 
-export { addForum, getAllForum, getForumDetail, addComment, updateForum };
+export {
+  addForum,
+  getAllForum,
+  getForumDetail,
+  addComment,
+  updateForum,
+  deleteForum,
+};

@@ -11,6 +11,7 @@ const ListForum = () => {
     isLoading,
     error,
     data: forumList,
+    refetch,
   } = useQuery(["forumList", category], () => getAllForum(category));
 
   return (
@@ -20,7 +21,7 @@ const ListForum = () => {
             return <SkeletonForum key={idx} />;
           })
         : forumList.map((data, idx) => {
-            return <ForumCard key={data.fuid} data={data} />;
+            return <ForumCard key={data.fuid} data={data} refetch={refetch} />;
           })}
     </div>
   );

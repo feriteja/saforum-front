@@ -37,7 +37,7 @@ function EditForumSub() {
       await updateForum(formData, token as AuthTokenType);
       showSnackbar("forum has been updated");
       showLoading(false);
-      navigate(`/forum/s/${state.fuid}`);
+      navigate(`/forum/f/${state.fuid}`);
     } catch (error) {
       showSnackbar("Failed to update forum");
 

@@ -1,65 +1,192 @@
 import { BiDownvote, BiUpvote } from "react-icons/bi";
-import { detailForumType, ForumType } from "../../constant/type/DataType";
+import { IoMdClose } from "react-icons/io";
+import {
+  AuthTokenType,
+  detailForumType,
+  ForumType,
+} from "../../constant/type/DataType";
 
-import { BsGear } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { BsGear, BsThreeDots } from "react-icons/bs";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UserState } from "../../context/UserContext";
 import Moment from "react-moment";
+import { MouseEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
+import { systemState } from "../../context/SystemContext";
+import { useLocalStorage } from "usehooks-ts";
+import { deleteForum } from "../../function/handler/forum/forum";
 
-const ForumCard = (data: { data: ForumType }) => {
+const ForumCard = ({ data, refetch }: { data: ForumType; refetch: any }) => {
   const { user } = UserState();
+  const { showLoading, showSnackbar } = systemState();
+  const [isOption, setIsOption] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const optionRef = useRef<HTMLDivElement>(null);
+  const [token, setToken] = useLocalStorage<AuthTokenType | null>(
+    "authToken",
+    null
+  );
+
   const navigate = useNavigate();
+  const authority =
+    user?.username === data.owner ||
+    user?.role === "admin" ||
+    user?.role === "superadmin";
+
+  const goToEdit = () => {
+    return navigate("/forum/edit", { state: data });
+  };
+  const onDeleteForum = async () => {
+    try {
+      showLoading(true);
+      await deleteForum(data.fuid || "", token as AuthTokenType);
+      showSnackbar("Forum has been deleted");
+      refetch();
+
+      showLoading(false);
+    } catch (error) {
+      showLoading(false);
+      showSnackbar("Forum failed to be deleted");
+
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      if (optionRef.current && !optionRef.current.contains(event.target)) {
+        setIsOption(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [optionRef]);
 
   return (
     <div
-      onClick={() => navigate(`/forum/f/${data.data.fuid}`)}
-      className="px-2 py-4 bg-primary shadow-md rounded-md space-y-2 cursor-pointer hover:outline outline-1 outline-slate-500  "
+      onClick={() => navigate(`/forum/f/${data.fuid}`)}
+      className=" relative px-2 py-4 bg-primary shadow-md rounded-md space-y-2 cursor-pointer hover:outline outline-1 outline-slate-500  "
     >
       <div className="flex justify-between">
         <div className="flex items-center space-x-2">
-          <p className="text-xs text-gray-400">Posted by {data.data.owner}. </p>
+          <p className="text-xs text-gray-400">Posted by {data.owner}. </p>
 
           <Moment
-            date={data.data.created_at}
+            date={data.created_at}
             fromNow
             className="font-thin text-xs text-gray-400"
           />
         </div>
         <div className="flex items-center space-x-3">
           <h2 className="font-semibold text-sm capitalize">
-            s/{data.data.category.toLowerCase()}
+            s/{data.category.toLowerCase()}
           </h2>
-          <div className=" p-2 group">
-            {user?.username === data.data.owner && (
-              <BsGear
+          {authority && (
+            <div
+              ref={optionRef}
+              onClick={(e: SyntheticEvent) => {
+                e.stopPropagation();
+                setIsOption((prev) => !prev);
+              }}
+              className="relative p-2 group"
+            >
+              <BsThreeDots
                 size={20}
                 className="text-gray-400 group-hover:text-primary"
               />
-            )}
-          </div>
+              {isOption && (
+                <div
+                  className={`flex flex-col text-center items-center absolute  bg-primary  shadow-xl outline outline-1 py-1 rounded z-20 right-0 `}
+                >
+                  <button
+                    onClick={(e: SyntheticEvent) => {
+                      e.stopPropagation();
+                      setShowModal(true);
+                      setIsOption(false);
+                    }}
+                    className="hover:bg-accent w-full mx-2"
+                    type="button"
+                    data-modal-toggle="deleteModal"
+                  >
+                    <h2>delete</h2>
+                  </button>
+                  <button
+                    disabled={user?.username !== data.owner}
+                    onClick={goToEdit}
+                    className="hover:bg-accent w-full mx-2 disabled:bg-gray-300 disabled:cursor-not-allowed "
+                  >
+                    <h2>edit</h2>
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 
-      <h1 className="font-semibold text-lg">{data.data.title}</h1>
-      {data.data.banner && (
+      <h1 className="font-semibold text-lg">{data.title}</h1>
+      {data.banner && (
         <img
-          src={`${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${
-            data.data.banner
-          }`}
+          src={`${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${data.banner}`}
           alt="banner"
           className="w-11/12 h-72  mx-auto rounded"
         />
       )}
 
       <div className=" line-clamp-6">
-        <p>{data.data.content}</p>
+        <p>{data.content}</p>
       </div>
       <div className="flex items-center space-x-4">
         <div className="flex justify-evenly space-x-2    ">
           <BiUpvote size={18} />
           <BiDownvote size={18} />
         </div>
-        <p>{data.data.comment || 0} comment</p>
+        <p>{data.comment || 0} comment</p>
+      </div>
+
+      <div
+        id="deleteModal"
+        onClick={(e: SyntheticEvent) => {
+          e.stopPropagation();
+          setShowModal(false);
+        }}
+        className={` flex flex-col ${
+          !showModal
+            ? "hidden"
+            : "absolute flex top-0 bottom-0 left-0 right-0 z-10 "
+        }   bg-gray-600/80 duration-200 text-white  `}
+      >
+        <div className="flex items-center justify-between   border-b border-b-gray-200   h-16  px-3">
+          <h1 className="text-xl font-semibold">Delete {data.title}</h1>
+          <div className="p-2 hover:bg">
+            <IoMdClose size={28} />
+          </div>
+        </div>
+        <div className="p-4">
+          <h2 className="text-white/80">
+            You are about to delete <strong>{data.title}</strong> by
+            <strong> {data.owner}</strong>
+          </h2>
+        </div>
+        <div className="flex p-4 space-x-5 font-semibold ">
+          <button
+            onClick={onDeleteForum}
+            className="px-3 py-2 bg-button rounded-md"
+          >
+            Delete
+          </button>
+          <button
+            onClick={(e: SyntheticEvent) => {
+              e.stopPropagation();
+              setShowModal(false);
+            }}
+            className="px-3 py-2 outline outline-1 rounded-md hover:bg-gray-400 "
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

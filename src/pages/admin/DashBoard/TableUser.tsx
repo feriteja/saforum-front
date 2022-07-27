@@ -59,7 +59,7 @@ const TableUser = () => {
               <th scope="col" className="py-3 px-6">
                 username
               </th>
-              <th scope="col" className="py-3 px-6">
+              <th scope="col" className="py-3 px-6 hidden md:block">
                 uuid
               </th>
               <th scope="col" className="py-3 px-6">

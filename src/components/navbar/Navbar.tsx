@@ -55,14 +55,24 @@ const Navbar = () => {
             <h1 className="font-bold text-2xl z-40">SaForum</h1>
           </NavLink>
           {(user?.role === "admin" || user?.role === "superadmin") && (
-            <NavLink
-              to={"/admin/"}
-              className={({ isActive }) =>
-                isActive ? "text-accent" : "text-primary"
-              }
-            >
-              <h1 className="font-bold text-lg z-40">Dashboard</h1>
-            </NavLink>
+            <>
+              <NavLink
+                to={"/admin/"}
+                className={({ isActive }) =>
+                  isActive ? "text-accent" : "text-primary"
+                }
+              >
+                <h1 className="font-bold text-lg z-40">Dashboard</h1>
+              </NavLink>
+              <NavLink
+                to={"admin/app-log/"}
+                className={({ isActive }) =>
+                  isActive ? "text-accent" : "text-primary"
+                }
+              >
+                <h1 className="font-bold text-lg z-40">AppLog</h1>
+              </NavLink>
+            </>
           )}
         </div>
         <ul className="hidden sm:flex justify-center font-bold items-center text-center sm:text-sm md:text-base ">

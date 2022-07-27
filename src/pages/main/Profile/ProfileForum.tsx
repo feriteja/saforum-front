@@ -13,7 +13,7 @@ const ProfileForum = () => {
 
   const { username } = useParams();
 
-  const { isLoading, error, data } = useQuery(
+  const { isLoading, error, data, refetch } = useQuery(
     ["profileForum", username],
     () => getUserForumByUsername(username || ""),
     { retry: 2 }
@@ -44,7 +44,7 @@ const ProfileForum = () => {
   return (
     <div className="space-y-4 mt-4">
       {data.data.map((val, idx) => {
-        return <ForumCard data={val} key={`forum-${idx}`} />;
+        return <ForumCard refetch={refetch} data={val} key={`forum-${idx}`} />;
       })}
     </div>
   );
