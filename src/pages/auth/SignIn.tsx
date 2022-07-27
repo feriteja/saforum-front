@@ -59,7 +59,7 @@ const signIn = () => {
         )}
         <form onSubmit={onSubmit} className="space-y-4 mt-2">
           <InputForm
-            onChange={(text) => setUserName(text)}
+            onChange={(text) => setUserName(text.toLowerCase())}
             label="Username or Email Address"
             Icon={BiUser}
             placeHolder="user@mail.com"

@@ -2,6 +2,7 @@ import React from "react";
 import { BiSun } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import { UserState } from "../../context/UserContext";
+import { SearchNav } from "../";
 
 interface props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,6 +32,16 @@ const MobileNav = (props: props) => {
         }
       >
         <ul className="font-bold flex flex-col justify-evenly h-40 space-y-3">
+          <NavLink
+            to={"/search"}
+            className={({ isActive }) =>
+              isActive ? "text-accent" : "text-primary"
+            }
+          >
+            <li onClick={props.handleNav}>
+              <SearchNav />
+            </li>
+          </NavLink>
           <NavLink
             to={"/"}
             className={({ isActive }) =>

@@ -29,13 +29,13 @@ const SearchPage = () => {
   return (
     <div className="py-6 space-y-4">
       <form onSubmit={onSubmit}>
-        <div className=" flex items-center space-x-3 bg-primary px-3 rounded-full shadow-md overflow-hidden">
+        <div className=" flex items-center space-x-3 bg-primary px-3 rounded-full shadow-md overflow-hidden mx-2">
           <BiSearch size={25} />
           <input
             type="text"
             onChange={(e) => setTitleForum(e.target.value)}
             placeholder="Title"
-            className="w-full outline-none py-4"
+            className="w-full outline-none py-4 bg-primary"
           />
         </div>
       </form>

@@ -60,7 +60,7 @@ const SignUp = () => {
         {error && <p className="text-center text-red-400">{error}</p>}
         <form onSubmit={onSubmit} className="space-y-4">
           <InputForm
-            onChange={(text) => setUserName(text)}
+            onChange={(text) => setUserName(text.toLowerCase())}
             label="Username or Email Address"
             Icon={BiUser}
             placeHolder="user@mail.com"

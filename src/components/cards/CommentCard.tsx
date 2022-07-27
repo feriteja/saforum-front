@@ -1,6 +1,6 @@
 import React from "react";
 import { CommentType } from "../../constant/type/DataType";
-import avatar from "../../assets/avatar/avataaars (3).png";
+import avatar from "../../assets/avatar/avataaars.png";
 import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
 

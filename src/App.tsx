@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { Footer, Loading, Navbar, SnackBar } from "./components";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -22,12 +22,14 @@ import {
 import { NotFound } from "./pages/warn";
 import About from "./pages/warn/About";
 import axios from "axios";
+import { useState } from "react";
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL + "/api";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const navigate = useNavigate();
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider initialTheme="light">
@@ -75,7 +77,10 @@ function App() {
                   <Loading />
                   <SnackBar />
                 </div>
-                <div className="fixed -bottom-14 -right-14 h-28 w-28 -rotate-45  rounded-full hover:-bottom-5 hover:-right-5 duration-300">
+                <div
+                  onClick={() => navigate("/about")}
+                  className="fixed -bottom-6 -right-6 md:-bottom-14 md:-right-14 h-14 w-14 md:h-28 md:w-28 -rotate-45  rounded-full  hover:bottom-2 hover:right-2 md:hover:-bottom-5 md:hover:-right-5 duration-300"
+                >
                   <div className="w-full h-full rounded-full  bg-accent border-primary    border-4 ">
                     <div className="w-full h-full flex items-center justify-center rounded-full bg-accent ">
                       <h1 className="font-semibold text-black">About</h1>

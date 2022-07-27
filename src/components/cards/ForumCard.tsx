@@ -27,7 +27,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
   const { showLoading, showSnackbar } = systemState();
   const [isOption, setIsOption] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const optionRef = useRef<HTMLDivElement>(null);
+  const optionRef = useRef<HTMLButtonElement>(null);
   const [token, setToken] = useLocalStorage<AuthTokenType | null>(
     "authToken",
     null
@@ -131,7 +131,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
             s/{data.category.toLowerCase()}
           </h2>
           {authority && (
-            <div
+            <button
               ref={optionRef}
               onClick={(e: SyntheticEvent) => {
                 e.stopPropagation();
@@ -145,7 +145,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
               />
               {isOption && (
                 <div
-                  className={`flex flex-col text-center items-center absolute  bg-primary  shadow-xl outline outline-1 py-1 rounded z-20 right-0 `}
+                  className={`flex flex-col text-center items-center absolute  bg-primary  shadow-xl outline outline-1 py-1 rounded  right-0 `}
                 >
                   <button
                     onClick={(e: SyntheticEvent) => {
@@ -168,13 +168,13 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
                   </button>
                 </div>
               )}
-            </div>
+            </button>
           )}
         </div>
       </div>
 
       <h1 className="font-semibold text-xl">{data.title}</h1>
-      {data.banner && (
+      {data.banner !== "undefined" && data.banner && (
         <img
           src={`${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${data.banner}`}
           alt="banner"
@@ -182,7 +182,13 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
         />
       )}
 
-      <div className={`${data.banner ? "line-clamp-2" : "line-clamp-6"}`}>
+      <div
+        className={`${
+          data.banner !== "undefined" && data.banner
+            ? "line-clamp-2"
+            : "line-clamp-6"
+        }`}
+      >
         <p>{data.content}</p>
       </div>
       <div className="flex items-center space-x-4">
