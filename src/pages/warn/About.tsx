@@ -15,8 +15,8 @@ import {
 const About = () => {
   return (
     <div className="py-4">
-      <div className="bg-primary px-3 py-4 space-y-5 ">
-        <div className="flex space-x-3">
+      <div className="bg-primary px-3 py-4 space-y-5  ">
+        <div className="flex space-x-3 border-b-2 pb-4">
           <img
             src={Profile}
             alt="profile"
@@ -26,24 +26,50 @@ const About = () => {
             <h1 className="font-bold text-3xl">Feri Teja Kusuma</h1>
             <h1 className="font-semibold">WGS Bootcamp batch 2</h1>
             <h1 className="">Pangalengan, Bandung</h1>
-            <div className="flex justify-evenly mt-5  space-x-3  ">
-              <a href="https://github.com/feriteja" target={"_blank"}>
-                <img src={github} className="w-10" alt="github" />
+            <div className="flex flex-col  justify-evenly mt-5  space-y-4">
+              <a
+                href="https://github.com/feriteja"
+                target={"_blank"}
+                className="space-x-2"
+              >
+                <img src={github} className="w-10 inline-block" alt="github" />
+                <h1 className="inline-block">@feriteja</h1>
               </a>
-              <a href="https://www.instagram.com/feri_teja/" target={"_blank"}>
-                <img src={instagram} className="w-10" alt="instagram" />
+              <a
+                href="https://www.instagram.com/feri_teja/"
+                className="space-x-2"
+                target={"_blank"}
+              >
+                <img
+                  src={instagram}
+                  className="w-10 inline-block"
+                  alt="instagram"
+                />
+                <h1 className="inline-block">@feri_teja</h1>
               </a>
               <a
                 href="https://www.linkedin.com/in/feri-teja-kusuma-827545122/"
                 target={"_blank"}
+                className="space-x-2"
               >
-                <img src={linkedin} className="w-10" alt="linkedin" />
+                <img
+                  src={linkedin}
+                  className="w-10 inline-block"
+                  alt="linkedin"
+                />
+                <h1 className="inline-block">@feri-teja-kusuma-827545122/</h1>
               </a>
               <a
                 href="https://wa.me/6281394030058?text=feri teja kusuma"
                 target={"_blank"}
+                className="space-x-2"
               >
-                <img src={whatsapp} className="w-10" alt="whatsapp" />
+                <img
+                  src={whatsapp}
+                  className="w-10 inline-block"
+                  alt="whatsapp"
+                />
+                <h1 className="inline-block">+62-8139-4030-058</h1>
               </a>
             </div>
           </div>
@@ -63,10 +89,10 @@ const About = () => {
             <img src={react} alt="react" className="w-40" />
           </div>
           <div className="col-span-6 md:col-span-4 flex items-center justify-center  ">
-            <img src={postgresql} alt="postgresql" className="w-40" />
+            <img src={tailwindcss} alt="tailwindcss" className="w-40" />
           </div>
           <div className="col-span-6 md:col-span-4 flex items-center justify-center  ">
-            <img src={tailwindcss} alt="tailwindcss" className="w-40" />
+            <img src={postgresql} alt="postgresql" className="w-40" />
           </div>
         </div>
       </div>
