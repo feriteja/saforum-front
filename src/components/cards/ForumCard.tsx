@@ -92,6 +92,11 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
     }
   };
 
+  const onCategoryClick = (e: SyntheticEvent) => {
+    e.stopPropagation();
+    navigate(`/forum/s/${data.category}`);
+  };
+
   useEffect(() => {
     setIsLiked(data.like_by?.includes(user?.uuid as string));
 
@@ -127,7 +132,10 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
           />
         </div>
         <div className="flex items-center space-x-3">
-          <h2 className="font-semibold text-sm capitalize">
+          <h2
+            onClick={onCategoryClick}
+            className="font-semibold text-sm capitalize hover:underline"
+          >
             s/{data.category.toLowerCase()}
           </h2>
           {authority && (

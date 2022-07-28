@@ -48,12 +48,32 @@ const Content = ({ ...props }: detailForumType) => {
     }
   };
 
+  const onCategoryClick = (e: SyntheticEvent) => {
+    e.stopPropagation();
+    navigate(`/forum/s/${props.category.toUpperCase()}`);
+  };
+
+  const onUserNameClick = (e: SyntheticEvent) => {
+    e.stopPropagation();
+    navigate(`/user/${props.username}`);
+  };
+
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex space-x-2 ">
-          <h2 className="text-xs font-bold flex">s/{props.category}</h2>
-          <p className="text-xs ">. Posted by u/{props.username}</p>
+          <h2
+            onClick={onCategoryClick}
+            className="text-xs font-bold flex hover:underline cursor-pointer"
+          >
+            s/{props.category}
+          </h2>
+          <h1
+            onClick={onUserNameClick}
+            className="text-xs hover:underline cursor-pointer "
+          >
+            . Posted by u/{props.username}
+          </h1>
           <Moment
             format="D MMM YYYY"
             date={props.created_at}

@@ -23,6 +23,7 @@ import { NotFound } from "./pages/warn";
 import About from "./pages/warn/About";
 import axios from "axios";
 import { useState } from "react";
+import { ProtectedRouteAdminOnly } from "./function/handler/route/ProtectedRouteAdminOnly";
 
 axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL + "/api";
 
@@ -64,8 +65,20 @@ function App() {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/forgot" element={<ForgotPassword />} />
                     <Route path="admin">
-                      <Route path="" element={<AdminDashboard />} />
-                      <Route path="app-log" element={<AppLogPage />} />
+                      <Route
+                        path=""
+                        element={
+                          <ProtectedRouteAdminOnly
+                            children={<AdminDashboard />}
+                          />
+                        }
+                      />
+                      <Route
+                        path="app-log"
+                        element={
+                          <ProtectedRouteAdminOnly children={<AppLogPage />} />
+                        }
+                      />
                     </Route>
                     <Route path="/about" element={<About />} />
                     <Route path="/notFound" element={<NotFound />} />

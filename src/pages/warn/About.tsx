@@ -9,6 +9,7 @@ import {
   postman,
   react,
   tailwindcss,
+  whatsapp,
 } from "../../assets";
 
 const About = () => {
@@ -37,6 +38,12 @@ const About = () => {
                 target={"_blank"}
               >
                 <img src={linkedin} className="w-10" alt="linkedin" />
+              </a>
+              <a
+                href="https://wa.me/6281394030058?text=feri teja kusuma"
+                target={"_blank"}
+              >
+                <img src={whatsapp} className="w-10" alt="whatsapp" />
               </a>
             </div>
           </div>
