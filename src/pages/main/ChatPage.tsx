@@ -10,7 +10,7 @@ interface stateProps {
   target: string;
 }
 
-const socket = io(`http://localhost:3003`, {
+const socket = io(import.meta.env.VITE_APP_BASE_URL, {
   transports: ["websocket", "polling"],
 });
 const ChatPage = () => {
