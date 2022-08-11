@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BsGear } from "react-icons/bs";
+import React, { useMemo, useState } from "react";
+import { BsChat, BsGear } from "react-icons/bs";
 import { UserState } from "../../../context/UserContext";
 import avatar from "../../../assets/avatar/avataaars.png";
 import { useQuery } from "@tanstack/react-query";
@@ -29,6 +29,15 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
+  const chatRoom = useMemo(() => {
+    const roomName = [username, user?.username].sort().join("");
+    return roomName;
+  }, [username, user?.username]);
+
+  const toChat = () => {
+    navigate("/chat", { state: { room: chatRoom, target: username } });
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -56,12 +65,22 @@ const Profile = () => {
                   avatar
                 }
                 alt="avatar"
-                className="w-24 md:w-28 lg:w-32 mx-2"
+                className="w-24 md:w-28 lg:w-32 mx-2 rounded-full"
               />
-              <div className="ml-4">
-                <h1 className="font-semibold text-xl">
-                  {data?.alias || data?.username}
-                </h1>
+              <div className="ml-4 w-full ">
+                <div className="flex space-x-4 items-center justify-between    ">
+                  <h1 className="font-semibold text-xl">
+                    {data?.alias || data?.username}
+                  </h1>
+                  {!isOwner && (
+                    <button
+                      onClick={toChat}
+                      className="shadow-xl p-2 rounded-md"
+                    >
+                      <BsChat size={30} />
+                    </button>
+                  )}
+                </div>
                 <h2 className="text-gray-400 font-bold">@{data?.username}</h2>
                 {isOwner && (
                   <h2 className="text-gray-400">{data?.uuid?.slice(0, 8)}</h2>

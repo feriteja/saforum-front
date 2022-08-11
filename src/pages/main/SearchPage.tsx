@@ -24,8 +24,6 @@ const SearchPage = () => {
     e.preventDefault();
   };
 
-  console.log(forumList);
-
   return (
     <div className="py-6 space-y-4">
       <form onSubmit={onSubmit}>

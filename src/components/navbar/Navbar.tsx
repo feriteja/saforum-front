@@ -53,7 +53,7 @@ const Navbar = () => {
       <nav className=" flex items-center justify-between h-16 bg-primary shadow-xl  z-10 w-full px-2 sm:px-4 md:px-6 ">
         <div className="flex items-baseline  space-x-3 ">
           <NavLink to={"/"}>
-            <h1 className="font-bold text-2xl z-40">SaForum</h1>
+            <h1 className="font-bold text-2xl z-40 font-mochi-pop ">SaForum</h1>
           </NavLink>
           {(user?.role === "admin" || user?.role === "superadmin") && (
             <>
@@ -114,16 +114,29 @@ const Navbar = () => {
           </li>
 
           {!user ? (
-            <li className="mx-2">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-accent" : "text-primary"
-                }
-                to={"/signIn"}
-              >
-                Sign In
-              </NavLink>
-            </li>
+            <>
+              <li className="mx-2">
+                <button onClick={() => setIsDark((prev) => !prev)}>
+                  <div
+                    className={`flex ${
+                      isDark ? "justify-end " : "justify-start "
+                    } bg-accent w-12 p-1 rounded-full duration-1000 text-black`}
+                  >
+                    <BiSun />
+                  </div>
+                </button>
+              </li>
+              <li className="mx-2">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-accent" : "text-primary"
+                  }
+                  to={"/signIn"}
+                >
+                  Sign In
+                </NavLink>
+              </li>
+            </>
           ) : (
             <>
               <li className="mx-2">

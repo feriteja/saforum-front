@@ -3,11 +3,17 @@ export interface UserType {
   role: "superadmin" | "admin" | "user";
   avatar?: string | File;
   status?: string;
-  forumown?: string[];
   alias?: string;
   uuid: string;
   created_at?: Date;
   state?: "banned" | "free";
+}
+
+export interface ChatType {
+  createdtime: number;
+  message: string;
+  room: string;
+  username: string;
 }
 
 export interface AuthTokenType {
@@ -19,7 +25,7 @@ export interface ForumType {
   fuid?: string;
   title?: string;
   banner?: string;
-  owner?: string;
+  owner?: { username: string; uuid: string };
   created_at?: Date;
   content?: string;
   comment?: number;
@@ -28,8 +34,6 @@ export interface ForumType {
   like_by: string[];
 }
 export interface detailForumType extends Omit<ForumType, "comment"> {
-  username?: string;
-  alias?: string;
   comment?: CommentType[];
 }
 

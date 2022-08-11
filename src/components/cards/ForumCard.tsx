@@ -35,7 +35,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
 
   const navigate = useNavigate();
   const authority =
-    user?.username === data.owner ||
+    user?.username === data.owner?.username ||
     user?.role === "admin" ||
     user?.role === "superadmin";
 
@@ -123,7 +123,9 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
     >
       <div className="flex justify-between">
         <div className="flex items-center space-x-2">
-          <p className="text-xs text-gray-400">Posted by {data.owner}. </p>
+          <p className="text-xs text-gray-400">
+            Posted by {data?.owner?.username}.{" "}
+          </p>
 
           <Moment
             date={data.created_at}
@@ -168,7 +170,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
                     <h2>delete</h2>
                   </button>
                   <button
-                    disabled={user?.username !== data.owner}
+                    disabled={user?.username !== data.owner?.username}
                     onClick={goToEdit}
                     className="hover:bg-accent w-full mx-2 disabled:bg-gray-300 disabled:cursor-not-allowed "
                   >
@@ -186,7 +188,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
         <img
           src={`${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${data.banner}`}
           alt="banner"
-          className="w-11/12 h-72  mx-auto rounded"
+          className="w-11/12 h-72 object-contain  mx-auto rounded"
         />
       )}
 
@@ -232,7 +234,7 @@ const ForumCard = ({ data, refetch }: { data: ForumType; refetch?: any }) => {
         <div className="p-4">
           <h2 className="text-white/80">
             You are about to delete <strong>{data.title}</strong> by
-            <strong> {data.owner}</strong>
+            <strong> {data.owner?.username}</strong>
           </h2>
         </div>
         <div className="flex p-4 space-x-5 font-semibold ">

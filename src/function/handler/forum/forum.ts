@@ -33,7 +33,6 @@ const getAllForum = async (category?: string) => {
     });
     return res.data.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -125,7 +124,7 @@ const updateForum = async (formData: FormData, token: AuthTokenType) => {
       },
       data: formData,
     });
-    console.log("first");
+
     return true;
   } catch (error) {}
 };

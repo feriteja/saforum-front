@@ -25,9 +25,11 @@ const Content = ({ ...props }: detailForumType) => {
   );
 
   const authority =
-    user?.username === props.username ||
+    user?.username === props.owner?.username ||
     user?.role === "admin" ||
     user?.role === "superadmin";
+
+  console.log(props);
 
   const goToEdit = () => {
     return navigate("/forum/edit", { state: props });
@@ -55,7 +57,7 @@ const Content = ({ ...props }: detailForumType) => {
 
   const onUserNameClick = (e: SyntheticEvent) => {
     e.stopPropagation();
-    navigate(`/user/${props.username}`);
+    navigate(`/user/${props.owner?.username}`);
   };
 
   return (
@@ -72,7 +74,7 @@ const Content = ({ ...props }: detailForumType) => {
             onClick={onUserNameClick}
             className="text-xs hover:underline cursor-pointer "
           >
-            . Posted by u/{props.username}
+            . Posted by u/{props.owner?.username}
           </h1>
           <Moment
             format="D MMM YYYY"
@@ -111,7 +113,7 @@ const Content = ({ ...props }: detailForumType) => {
                   <h2>delete</h2>
                 </button>
                 <button
-                  disabled={user?.username !== props.owner}
+                  disabled={user?.username !== props.owner?.username}
                   onClick={goToEdit}
                   className="hover:bg-accent w-full mx-2 disabled:bg-gray-300 disabled:cursor-not-allowed "
                 >
@@ -154,7 +156,7 @@ const Content = ({ ...props }: detailForumType) => {
         <div className="p-4">
           <h2 className="text-white/80">
             You are about to delete <strong>{props.title}</strong> by
-            <strong> {props.owner}</strong>
+            <strong> {props.owner?.username}</strong>
           </h2>
         </div>
         <div className="flex p-4 space-x-5 font-semibold ">

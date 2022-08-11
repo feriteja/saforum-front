@@ -10,6 +10,7 @@ import { RequireAuth } from "./function/handler/route/ProtectedRoute";
 import { AdminDashboard, AppLogPage } from "./pages/admin";
 import { ForgotPassword, SignIn, SignUp } from "./pages/auth";
 import {
+  ChatPage,
   EditForumSub,
   ForumPage,
   ForumSubPage,
@@ -42,6 +43,7 @@ function App() {
                 <div className="mx-auto max-w-5xl  ">
                   <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/chat" element={<ChatPage />} />
                     <Route path="/search" element={<SearchPage />} />
 
                     <Route path="/forum" element={<ForumPage />}>

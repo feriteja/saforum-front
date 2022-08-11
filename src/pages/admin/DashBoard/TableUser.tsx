@@ -25,7 +25,7 @@ const TableUser = () => {
     e.preventDefault();
     try {
       const list = await getAllUser(token as AuthTokenType, userInput);
-      console.log(list);
+
       setUserList(list || []);
     } catch (error) {
       throw error;

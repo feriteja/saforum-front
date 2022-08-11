@@ -26,7 +26,7 @@ const UserProvider: React.FC<any> = ({ children }) => {
     } else {
       setUser(null);
     }
-  }, [decodedToken, isExpired]);
+  }, [decodedToken, isExpired, token]);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

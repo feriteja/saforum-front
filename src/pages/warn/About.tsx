@@ -75,7 +75,9 @@ const About = () => {
           </div>
         </div>
         <div>
-          <h1 className="text-center font-bold text-5xl">SaForum</h1>
+          <h1 className="text-center font-bold text-5xl font-mochi-pop">
+            SaForum
+          </h1>
           <p className="text-center">Forum asik untuk berbagi cerita</p>
         </div>
         <div className=" grid grid-cols-12">

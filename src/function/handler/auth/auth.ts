@@ -1,9 +1,10 @@
 import axios from "axios";
+import { AuthTokenType } from "../../../constant/type/DataType";
 // axios.defaults.baseURL = "http://127.0.0.1:3003";
 
-interface TokenType {
-  access_token: string;
-  refresh_token: string;
+interface SignType {
+  message: string;
+  token: AuthTokenType;
 }
 
 const signInFunc = async (username: string, password: string) => {
@@ -39,7 +40,7 @@ const signUpFunc = async (username: string, password: string) => {
   }
 };
 
-const signOutFunc = async (token: TokenType) => {
+const signOutFunc = async (token: AuthTokenType) => {
   try {
     const res = await axios({
       method: "post",
@@ -58,4 +59,20 @@ const signOutFunc = async (token: TokenType) => {
   }
 };
 
-export { signInFunc, signOutFunc, signUpFunc };
+const signRefresh = async (token: AuthTokenType) => {
+  try {
+    const res = await axios.request<SignType>({
+      method: "get",
+      url: "/auth/refresh",
+      headers: {
+        Authorization: `Bearer ${token.access_token}`,
+      },
+      params: {
+        refresh_token: token.refresh_token,
+      },
+    });
+    return res.data.token;
+  } catch (error) {}
+};
+
+export { signInFunc, signOutFunc, signUpFunc, signRefresh };

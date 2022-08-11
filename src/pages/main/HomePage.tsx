@@ -4,10 +4,25 @@ import { useLocalStorage } from "usehooks-ts";
 import { ListForum, PostCard, SideBar } from "../../components";
 import { AuthTokenType, UserType } from "../../constant/type/DataType";
 import { UserState } from "../../context/UserContext";
+import { signRefresh } from "../../function/handler/auth/auth";
 import { getUserDetailByUsername } from "../../function/handler/user/userhandler";
 
 const HomePage = () => {
   const { user } = UserState();
+  const [token, setToken] = useLocalStorage<AuthTokenType | null>(
+    "authToken",
+    null
+  );
+
+  // useEffect(() => {
+  //   if (user?.username) {
+  //     signRefresh(token as AuthTokenType).then((newToken) =>
+  //       setToken(newToken as AuthTokenType)
+  //     );
+  //   }
+
+  //   return () => {};
+  // }, [user]);
 
   return (
     <div className="grid md:grid-cols-9 gap-3 p-2 ">

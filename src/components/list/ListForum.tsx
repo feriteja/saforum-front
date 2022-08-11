@@ -16,6 +16,8 @@ const ListForum = () => {
     refetch,
   } = useQuery(["forumList", category], () => getAllForum(category));
 
+  console.log(forumList);
+
   return (
     <div className="space-y-3">
       {!forumList || isLoading

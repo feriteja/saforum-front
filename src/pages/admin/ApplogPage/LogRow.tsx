@@ -7,7 +7,6 @@ interface props {
 }
 
 const LogRow = ({ data }: props) => {
-  console.log(data);
   return (
     <tr className="bg-primary border-b-2">
       <th scope="row" className="py-4 px-6 font-medium  whitespace-nowrap ">
@@ -23,7 +22,7 @@ const LogRow = ({ data }: props) => {
         {data.status}
       </td>
       <td>
-        <Moment format="D MMM YYYY" date={data.time} withTitle className="" />
+        <Moment format="D MMM YYYY hh:mm:ss" date={data.time} withTitle />
       </td>
     </tr>
   );

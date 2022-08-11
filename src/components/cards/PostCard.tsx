@@ -1,14 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import avatar from "../../assets/avatar/avataaars.png";
 import { systemState } from "../../context/SystemContext";
 import { UserState } from "../../context/UserContext";
+import { getUserDetailByUsername } from "../../function/handler/user/userhandler";
 
 const PostCard = () => {
   const navigate = useNavigate();
   const { user } = UserState();
   const { showSnackbar } = systemState();
+  const { isLoading, error, data } = useQuery(
+    ["profile", user?.username],
+    () => getUserDetailByUsername(user?.username),
+    { retry: 1 }
+  );
   const toProfile = () => {
+    if (user?.avatar === "undefined" || user?.avatar === undefined)
+      return navigate("/signin");
     navigate(`/user/${user?.username}`);
   };
   const toPostPage = () => {
@@ -25,9 +34,9 @@ const PostCard = () => {
       <button onClick={toProfile}>
         <img
           src={
-            (user?.avatar &&
+            (data?.avatar &&
               `${import.meta.env.VITE_APP_BASE_URL}/public/tmp/${
-                user.avatar as string
+                data.avatar as string
               }`) ||
             avatar
           }

@@ -4,6 +4,7 @@ export { default as ProfilePageEdit } from "./ProfilePageEdit";
 export { default as ProfileActivity } from "./Profile/ProfileActivity";
 export { default as ProfileForum } from "./Profile/ProfileForum";
 export { default as PostingPage } from "./PostingPage";
+export { default as ChatPage } from "./ChatPage";
 export { default as ForumPage } from "./ForumPage";
 export { default as EditForumSub } from "./EditForumSub";
 export { default as SearchPage } from "./SearchPage";

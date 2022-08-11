@@ -10,11 +10,31 @@
   @apply border border-secondary rounded-2xl shadow-2xl bg-primary  max-w-[1140px]  w-full mx-auto;
 }
 
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #f7f4ed;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #e0cbcb;
+  border-radius: 100vh;
+  border: 3px solid #f6f7ed;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #c0a0b9;
+}
+
 .dark {
   --color-bg-primary: #313c51;
   --color-bg-secondary: #283141;
   --color-text-primary: #dbdbdb;
   --color-text-secondary: #e2e8f0;
+  --color-text-button: #283141;
   --color-accent: #81e6d9;
   --color-bg-input: #4a5361;
   --color-bg-button: #81e6d9;
@@ -26,6 +46,7 @@
   --color-bg-secondary: #edf2f7;
   --color-text-primary: #2d3748;
   --color-text-secondary: #4a5568;
+  --color-text-button: #edf2f7;
   --color-accent: #f58611;
   --color-bg-input: #edf2f7;
   --color-bg-button: #f58611;
