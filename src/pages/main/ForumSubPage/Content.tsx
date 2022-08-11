@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useRef, useState } from "react";
-import { BsGear, BsThreeDots } from "react-icons/bs";
+import { BsChat, BsGear, BsThreeDots } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
 import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,9 @@ const Content = ({ ...props }: detailForumType) => {
     user?.role === "admin" ||
     user?.role === "superadmin";
 
-  console.log(props);
+  const toChat = () => {
+    navigate("/chat", { state: { room: props.fuid, target: props.title } });
+  };
 
   const goToEdit = () => {
     return navigate("/forum/edit", { state: props });
@@ -83,46 +85,53 @@ const Content = ({ ...props }: detailForumType) => {
             className="text-xs "
           />
         </div>
-        {authority && (
-          <button
-            ref={optionRef}
-            onClick={(e: SyntheticEvent) => {
-              e.stopPropagation();
-              setIsOption((prev) => !prev);
-            }}
-            className=" p-2 group"
-          >
-            <BsThreeDots
-              size={20}
-              className="text-gray-400 group-hover:text-primary"
-            />
-            {isOption && (
-              <div
-                className={`flex flex-col text-center items-center absolute  bg-primary  shadow-xl outline outline-1 py-1 rounded  right-0 `}
-              >
-                <button
-                  onClick={(e: SyntheticEvent) => {
-                    e.stopPropagation();
-                    setShowModal(true);
-                    setIsOption(false);
-                  }}
-                  className="hover:bg-accent w-full mx-2"
-                  type="button"
-                  data-modal-toggle="deleteModal"
+        <div className="flex items-center space-x-3">
+          <div onClick={toChat} className="flex shadow-sm cursor-pointer">
+            <BsChat size={20} />
+            <p>LiveChat</p>
+          </div>
+
+          {authority && (
+            <button
+              ref={optionRef}
+              onClick={(e: SyntheticEvent) => {
+                e.stopPropagation();
+                setIsOption((prev) => !prev);
+              }}
+              className=" p-2 group"
+            >
+              <BsThreeDots
+                size={20}
+                className="text-gray-400 group-hover:text-primary"
+              />
+              {isOption && (
+                <div
+                  className={`flex flex-col text-center items-center absolute  bg-primary  shadow-xl outline outline-1 py-1 rounded  right-0 `}
                 >
-                  <h2>delete</h2>
-                </button>
-                <button
-                  disabled={user?.username !== props.owner?.username}
-                  onClick={goToEdit}
-                  className="hover:bg-accent w-full mx-2 disabled:bg-gray-300 disabled:cursor-not-allowed "
-                >
-                  <h2>edit</h2>
-                </button>
-              </div>
-            )}
-          </button>
-        )}
+                  <button
+                    onClick={(e: SyntheticEvent) => {
+                      e.stopPropagation();
+                      setShowModal(true);
+                      setIsOption(false);
+                    }}
+                    className="hover:bg-accent w-full mx-2"
+                    type="button"
+                    data-modal-toggle="deleteModal"
+                  >
+                    <h2>delete</h2>
+                  </button>
+                  <button
+                    disabled={user?.username !== props.owner?.username}
+                    onClick={goToEdit}
+                    className="hover:bg-accent w-full mx-2 disabled:bg-gray-300 disabled:cursor-not-allowed "
+                  >
+                    <h2>edit</h2>
+                  </button>
+                </div>
+              )}
+            </button>
+          )}
+        </div>
       </div>
       <h1 className="font-semibold text-xl">{props.title}</h1>
       {props.banner !== "undefined" && props.banner && (
