@@ -26,7 +26,7 @@ import axios from "axios";
 import { useState } from "react";
 import { ProtectedRouteAdminOnly } from "./function/handler/route/ProtectedRouteAdminOnly";
 
-axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL + "/api";
+axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URLSECURE + "/api";
 
 const queryClient = new QueryClient();
 
