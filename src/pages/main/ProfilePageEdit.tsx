@@ -61,7 +61,7 @@ const ProfilePageEdit = () => {
           id="avatar"
           accept="image/*"
           multiple={false}
-          onChange={(img) => setAvatar(img.target.files[0])}
+          onChange={(img: any) => setAvatar(img.target.files[0])}
         />
         <label htmlFor="alias" className="font-semibold">
           Alias

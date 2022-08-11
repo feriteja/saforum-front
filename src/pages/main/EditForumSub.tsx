@@ -28,7 +28,7 @@ function EditForumSub() {
     try {
       showLoading(true);
       const formData = new FormData();
-      formData.append("banner", banner);
+      formData.append("banner", banner || "");
       formData.append("refresh_token", token?.refresh_token || "");
       formData.append("title", title || "");
       formData.append("content", content || "");
@@ -62,7 +62,7 @@ function EditForumSub() {
           name="banner"
           accept="image/*"
           multiple={false}
-          onChange={(img) => setBanner(img.target.files[0])}
+          onChange={(img: any) => setBanner(img?.target?.files[0])}
         />
         <label htmlFor="title" className="font-semibold">
           Title

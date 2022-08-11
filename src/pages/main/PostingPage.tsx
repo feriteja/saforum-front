@@ -55,7 +55,7 @@ const PostingPage = () => {
             name="avatar"
             accept="image/*"
             multiple={false}
-            onChange={(img) => setBanner(img.target.files[0])}
+            onChange={(img: any) => setBanner(img.target.files[0])}
           />
           <input
             id="titlePost"
