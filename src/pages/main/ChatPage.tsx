@@ -11,6 +11,7 @@ interface stateProps {
 }
 
 const socket = io(import.meta.env.VITE_APP_BASE_URL, {
+  secure: true,
   transports: ["websocket", "polling"],
 });
 const ChatPage = () => {
