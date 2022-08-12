@@ -35,8 +35,6 @@ const ChatPage = () => {
     });
   };
 
-  console.log(typing);
-
   useEffect(() => {
     if (message) {
       socket.emit("isTyping", {
@@ -65,7 +63,10 @@ const ChatPage = () => {
       });
     });
 
-    socket.on("userTyping", (data) => setTyping(data));
+    socket.on("userTyping", (data) => {
+      console.log(data);
+      setTyping(data);
+    });
     socket.on("disconnect", () => {});
 
     return () => {
