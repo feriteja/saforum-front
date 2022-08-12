@@ -85,7 +85,7 @@ const ChatPage = () => {
         <h1 className="text-center font-bold text-2xl ">{target}</h1>
       </div>
       <div className="flex flex-col flex-1  max-h-screen bg-secondary scrol shadow-xl overflow-scroll scrollbar ">
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col ">
           {messagesRecieved.map((data, idx) => (
             <BubbleChat key={`${data?.createdtime}` + idx} {...data} />
           ))}
