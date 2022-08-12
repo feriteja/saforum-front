@@ -59,6 +59,7 @@ const ChatPage = () => {
       setMessagesReceived(data);
     });
     socket.on("server_message", (data) => {
+      console.log(data);
       setMessagesReceived((oldState) => {
         return [...oldState, data];
       });
