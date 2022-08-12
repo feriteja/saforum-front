@@ -59,7 +59,6 @@ const ChatPage = () => {
       setMessagesReceived(data);
     });
     socket.on("server_message", (data) => {
-      console.log(data);
       setMessagesReceived((oldState) => {
         return [...oldState, data];
       });
@@ -81,7 +80,7 @@ const ChatPage = () => {
     };
   }, []);
   return (
-    <div className="flex min-h-screen   bg-red-400 flex-col">
+    <div className="flex min-h-screen    flex-col">
       <div className="flex items-center justify-center h-16 bg-primary shadow-md">
         <h1 className="text-center font-bold text-2xl ">{target}</h1>
       </div>

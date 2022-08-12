@@ -5,6 +5,8 @@ import { UserState } from "../../context/UserContext";
 const BubbleChat = (props: ChatType) => {
   const { user } = UserState();
 
+  console.log("propsBubble", { props, user });
+
   return (
     <div
       className={`${
