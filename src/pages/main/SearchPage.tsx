@@ -18,7 +18,9 @@ const SearchPage = () => {
     error,
     data: forumList,
     refetch,
-  } = useQuery(["forumList", titleName], () => getSearchForum(titleName));
+  } = useQuery(["forumList", titleName], () =>
+    getSearchForum({ title: titleName })
+  );
 
   const onSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

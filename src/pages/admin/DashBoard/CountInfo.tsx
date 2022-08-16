@@ -18,6 +18,7 @@ const CountInfo = (props: props) => {
   const { isLoading, error, data } = useQuery(["dataNumber"], () =>
     getNumberUserForum(token)
   );
+
   return (
     <div className="w-full  grid grid-cols-8 gap-4 px-2 ">
       <div className="flex flex-col col-span-8 md:col-span-4 bg-primary h-32 rounded-md px-3 py-2 shadow-md  ">
@@ -25,7 +26,7 @@ const CountInfo = (props: props) => {
         <div className="flex flex-1 justify-center items-center  space-x-3">
           <MdOutlinePerson size={30} />
           <h2 className="font-bold text-3xl text-center">
-            {data?.usersCount || 0}
+            {data?.userCount || 0}
           </h2>
         </div>
       </div>

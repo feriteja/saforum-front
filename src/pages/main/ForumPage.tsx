@@ -14,10 +14,10 @@ const ForumPage = () => {
     error,
     data: forumList,
     refetch,
-  } = useQuery(["forumList", category], () => getAllForum(category));
+  } = useQuery(["forumList", category], () => getAllForum({ category }));
 
   if (category) {
-    if (forumList?.length === 0) {
+    if (forumList?.data?.length === 0) {
       return (
         <div className="flex items-center justify-center min-h-screen">
           <h1 className="text-2xl font-bold">There is no content yet</h1>
@@ -28,7 +28,7 @@ const ForumPage = () => {
     return (
       <div className="py-5">
         <div className="space-y-3 ">
-          {forumList?.map((data, idx) => {
+          {forumList?.data?.map((data, idx) => {
             return <ForumCard refetch={refetch} data={data} key={data.fuid} />;
           })}
         </div>

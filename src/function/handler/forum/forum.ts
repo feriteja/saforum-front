@@ -8,8 +8,10 @@ import {
 const urlWithProxy = "/api/vi";
 
 interface ResponseForumType {
-  message: string;
   data: ForumType[];
+  totalPages: number;
+  currentPages: number;
+  total: number;
 }
 interface ResponseDetilForumType {
   message: string;
@@ -22,16 +24,26 @@ interface AddCommentProps {
   forumID: string;
 }
 
-const getAllForum = async (category?: string) => {
+const getAllForum = async ({
+  category,
+  limit,
+  offset,
+}: {
+  category?: string;
+  limit?: number;
+  offset?: number;
+}) => {
   try {
     const res = await axios.request<ResponseForumType>({
       method: "get",
       url: `/forum/`,
       params: {
         category,
+        limit,
+        offset,
       },
     });
-    return res.data.data;
+    return res.data;
   } catch (error) {
     throw error;
   }
@@ -61,12 +73,12 @@ const getForumDetail = async (forumId?: string) => {
   }
 };
 
-const getSearchForum = async (title: string) => {
+const getSearchForum = async ({ title = "", limit = 5, offset = 0 }) => {
   try {
     const res = await axios.request<ResponseForumType>({
       method: "get",
       url: "/forum/search",
-      params: { userInput: title },
+      params: { userInput: title, limit, offset },
     });
     return res.data.data;
   } catch (error) {}

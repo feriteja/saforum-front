@@ -6,21 +6,34 @@ import {
 } from "../../../constant/type/DataType";
 
 interface AllUserResponseType {
-  message: string;
   data: UserType[];
+  totalPages: number;
+  currentPages: number;
+  total: number;
 }
 interface userForumCount {
   message: string;
-  data: { forumCount: number; usersCount: number };
+  data: { forumCount: number; userCount: number };
 }
 
 interface AppLogProps {
-  message: string;
+  currentPages: number;
+  totalPages: number;
   data: AppLogType[];
 }
 
 //! ADMINONLY
-const getAllUser = async (token: AuthTokenType, username?: string) => {
+const getAllUser = async ({
+  token,
+  username,
+  offset = 0,
+  limit = 20,
+}: {
+  token: AuthTokenType;
+  username?: string;
+  offset?: number;
+  limit?: number;
+}) => {
   try {
     const res = await axios.request<AllUserResponseType>({
       method: "get",
@@ -33,7 +46,7 @@ const getAllUser = async (token: AuthTokenType, username?: string) => {
         username,
       },
     });
-    return res.data.data;
+    return res.data;
   } catch (error) {}
 };
 
@@ -82,7 +95,15 @@ const getNumberUserForum = async (token: AuthTokenType | null) => {
 };
 
 //! ADMINONLY
-const getAppLog = async (token?: AuthTokenType) => {
+const getAppLog = async ({
+  token,
+  limit = 20,
+  offset = 0,
+}: {
+  token?: AuthTokenType;
+  limit?: number;
+  offset?: number;
+}) => {
   try {
     const res = await axios.request<AppLogProps>({
       method: "get",
@@ -91,10 +112,14 @@ const getAppLog = async (token?: AuthTokenType) => {
         Authorization: `Bearer ${token?.access_token}`,
       },
       params: {
+        offset,
+        limit,
+
         refresh_token: token?.refresh_token,
       },
     });
-    return res.data.data;
+
+    return res.data;
   } catch (error) {
     throw error;
   }

@@ -92,7 +92,7 @@ function App() {
                   <Loading />
                   <SnackBar />
                 </div>
-                <div
+                {/* <div
                   onClick={() => navigate("/about")}
                   className="fixed -bottom-6 -right-6 md:-bottom-14 md:-right-14 h-14 w-14 md:h-28 md:w-28 -rotate-45  rounded-full  hover:bottom-2 hover:right-2 md:hover:-bottom-5 md:hover:-right-5 duration-300"
                 >
@@ -101,7 +101,7 @@ function App() {
                       <h1 className="font-semibold text-black">About</h1>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </SystemProvider>
           </UserProvider>
