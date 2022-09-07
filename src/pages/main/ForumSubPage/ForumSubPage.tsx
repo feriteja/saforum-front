@@ -35,7 +35,6 @@ const ForumSubPage = () => {
   if (!data || error) {
     return <Navigate to="/notFound" replace />;
   }
-  console.log(data);
 
   return (
     <div className="space-y-7">

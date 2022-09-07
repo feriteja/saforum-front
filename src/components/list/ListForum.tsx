@@ -30,12 +30,10 @@ const ListForum = () => {
     keepPreviousData: true,
   });
 
-  console.log(forumList);
-
   return (
     <div className="space-y-3">
       <InfiniteScroll
-        dataLength={(forumList?.data.length as number) || 3}
+        dataLength={(forumList?.data?.length as number) || 3}
         next={() => setPage((prev) => prev + 1)}
         hasMore={forumList?.currentPages === forumList?.totalPages}
         loader={[...Array(10).keys()].map((data, idx) => {
@@ -57,7 +55,7 @@ const ListForum = () => {
         }
       >
         <div className="space-y-3">
-          {forumList?.data.map((data, idx) => {
+          {forumList?.data?.map((data, idx) => {
             return <ForumCard key={data.fuid} data={data} refetch={refetch} />;
           })}
         </div>

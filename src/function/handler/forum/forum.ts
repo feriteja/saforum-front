@@ -51,11 +51,11 @@ const getAllForum = async ({
 
 const getPopularForum = async () => {
   try {
-    const res = axios.request<ResponseForumType>({
+    const res = await axios.request<ForumType[]>({
       method: "get",
       url: "/forum/popular",
     });
-    return (await res).data.data;
+    return res.data;
   } catch (error) {
     throw error;
   }
@@ -65,7 +65,7 @@ const getForumDetail = async (forumId?: string) => {
   try {
     const res = await axios.request<ResponseDetilForumType>({
       method: "get",
-      url: `forum/s/${forumId}`,
+      url: `forum/forumID/${forumId}`,
     });
     return res.data.data;
   } catch (error) {

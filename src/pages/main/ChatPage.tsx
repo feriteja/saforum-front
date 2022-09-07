@@ -1,6 +1,6 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import BubbleChat from "../../components/chat/BubbleChat";
 import { ChatType } from "../../constant/type/DataType";
 import { UserState } from "../../context/UserContext";
@@ -10,10 +10,11 @@ interface stateProps {
   target: string;
 }
 
-const socket = io(import.meta.env.VITE_APP_BASE_URL, {
+const socket = io(import.meta.env.VITE_APP_CHAT_URL, {
   secure: true,
   transports: ["websocket", "polling"],
 });
+
 const ChatPage = () => {
   const { user } = UserState();
 
@@ -25,11 +26,11 @@ const ChatPage = () => {
   const sendMessage = (e: SyntheticEvent) => {
     e.preventDefault();
     if (!message) return;
-    const createdtime = Date.now();
+    const createdtime = new Date();
     // Send message to server. We can't specify who we send the message to from the frontend. We can only send to server. Server can then send message to rest of users in room
     setMessage("");
     socket.emit("client_message", {
-      username: user?.username,
+      username: user?.username || "anonymous",
       room,
       message,
       createdtime,
@@ -40,7 +41,7 @@ const ChatPage = () => {
     if (message) {
       socket.emit("isTyping", {
         isTyping: true,
-        username: user?.username,
+        username: user?.username || "anonymous",
         room,
       });
     } else {
@@ -50,7 +51,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     socket.on("connect", () => console.log(socket.id));
-    socket.on("connect_error", () => {
+    socket.on("connect_error", (err) => {
       setTimeout(() => socket.connect(), 5000);
     });
 
@@ -65,7 +66,6 @@ const ChatPage = () => {
     });
 
     socket.on("userTyping", (data) => {
-      console.log(data);
       setTyping(data);
     });
     socket.on("disconnect", () => {});

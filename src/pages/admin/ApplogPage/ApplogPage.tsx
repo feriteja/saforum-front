@@ -35,8 +35,6 @@ const ApplogPage = () => {
     fetchAppLog()
   );
 
-  console.log(data);
-
   return (
     <div className="py-6">
       <div className="min-h-screen  bg-primary rounded-md overflow-hidden ">

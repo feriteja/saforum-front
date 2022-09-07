@@ -11,7 +11,7 @@ const signInFunc = async (username: string, password: string) => {
   try {
     const res = await axios({
       method: "post",
-      url: "/auth/signIn",
+      url: "/auth/signin",
       data: {
         username,
         password,
@@ -27,7 +27,7 @@ const signUpFunc = async (username: string, password: string) => {
   try {
     const res = await axios({
       method: "post",
-      url: "/auth/signUp",
+      url: "/auth/signup",
       data: {
         username,
         password,
@@ -44,7 +44,7 @@ const signOutFunc = async (token: AuthTokenType) => {
   try {
     const res = await axios({
       method: "post",
-      url: "/auth/signOut",
+      url: "/auth/signout",
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },

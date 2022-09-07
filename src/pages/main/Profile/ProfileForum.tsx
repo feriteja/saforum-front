@@ -19,8 +19,6 @@ const ProfileForum = () => {
     { retry: 2 }
   );
 
-  console.log(data);
-
   if (isLoading) {
     return (
       <div>
