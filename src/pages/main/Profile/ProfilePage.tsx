@@ -1,18 +1,10 @@
-import React, { useMemo, useState } from "react";
-import { BsChat, BsGear } from "react-icons/bs";
-import { UserState } from "../../../context/UserContext";
-import avatar from "../../../assets/avatar/avataaars.png";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Navigate,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { useMemo, useState } from "react";
+import { BsChat } from "react-icons/bs";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import avatar from "../../../assets/avatar/avataaars.png";
+import { UserState } from "../../../context/UserContext";
 import { getUserDetailByUsername } from "../../../function/handler/user/userhandler";
-import ProfileForum from "./ProfileForum";
-import ProfileActivity from "./ProfileActivity";
 
 const Profile = () => {
   const { user } = UserState();
@@ -125,7 +117,7 @@ const Profile = () => {
             </h1>
           </div>
         </div>
-        {showForum ? <ProfileForum /> : <ProfileActivity />}
+        {/* {showForum ? <ProfileForum /> : <ProfileActivity />} */}
       </div>
     </div>
   );

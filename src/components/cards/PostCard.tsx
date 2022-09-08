@@ -13,7 +13,7 @@ const PostCard = () => {
   const { isLoading, error, data } = useQuery(
     ["profile", user?.username],
     () => getUserDetailByUsername(user?.username),
-    { retry: 1 }
+    { retry: 1, enabled: !!user?.username }
   );
   const toProfile = () => {
     if (user?.avatar === "undefined" || user?.avatar === undefined)

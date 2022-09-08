@@ -1,12 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { ForumCard, SkeletonForum } from "../../../components";
 import { UserState } from "../../../context/UserContext";
-import {
-  getUserDetailByUsername,
-  getUserForumByUsername,
-} from "../../../function/handler/user/userhandler";
+import { getUserForumByUsername } from "../../../function/handler/user/userhandler";
 
 const ProfileForum = () => {
   const { user } = UserState();

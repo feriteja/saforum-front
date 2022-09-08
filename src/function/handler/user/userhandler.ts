@@ -5,10 +5,10 @@ import {
   UserType,
 } from "../../../constant/type/DataType";
 
-interface ProfileResponseType {
-  message: string;
-  user: UserType;
-}
+// interface ProfileResponseType {
+//   message: string;
+//   user: UserType;
+// }
 interface ProfileForumResponseType {
   message: string;
   data: ForumType[];
@@ -16,12 +16,12 @@ interface ProfileForumResponseType {
 
 const getUserDetailByUsername = async (username?: string) => {
   try {
-    const res = await axios.request<ProfileResponseType>({
+    const res = await axios.request<UserType>({
       method: "get",
       url: `/user/detail/${username}`,
     });
 
-    return res.data.user;
+    return res.data;
   } catch (error) {
     throw error;
   }

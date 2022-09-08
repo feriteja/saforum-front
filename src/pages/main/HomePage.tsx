@@ -1,11 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { ListForum, PostCard, SideBar } from "../../components";
-import { AuthTokenType, UserType } from "../../constant/type/DataType";
+import { AuthTokenType } from "../../constant/type/DataType";
 import { UserState } from "../../context/UserContext";
-import { signRefresh } from "../../function/handler/auth/auth";
-import { getUserDetailByUsername } from "../../function/handler/user/userhandler";
 
 const HomePage = () => {
   const { user } = UserState();

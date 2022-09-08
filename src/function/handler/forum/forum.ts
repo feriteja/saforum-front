@@ -94,7 +94,7 @@ const addForum = async ({
   try {
     const res = await axios({
       method: "post",
-      url: "/forum/add",
+      url: "/forum",
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
@@ -145,7 +145,7 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
   try {
     const res = await axios({
       method: "patch",
-      url: "/forum/comment",
+      url: "/forum",
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
