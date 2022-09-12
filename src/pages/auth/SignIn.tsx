@@ -10,6 +10,7 @@ import { systemState } from "../../context/SystemContext";
 import { signInFunc } from "../../function/handler/auth/auth";
 import { useLocalStorage } from "usehooks-ts";
 import { UserState } from "../../context/UserContext";
+import { useCookies } from "react-cookie";
 
 const signIn = () => {
   const [userName, setUserName] = useState("");
@@ -18,6 +19,8 @@ const signIn = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { user } = UserState();
+
+  const [cookies, setCookie, removeCookie] = useCookies(["auth-cookie"]);
 
   const [token, setToken] = useLocalStorage<AuthTokenType | null>(
     "authToken",
@@ -33,8 +36,11 @@ const signIn = () => {
     try {
       showLoading(true);
       const res = await signInFunc(userName, password);
+      console.log("signInFUnc", res);
 
       setToken(res.data.token);
+
+      setCookie("auth-cookie", res.data.token.refresh_token);
 
       showLoading(false);
 

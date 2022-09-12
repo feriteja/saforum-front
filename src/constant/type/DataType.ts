@@ -1,10 +1,10 @@
 export interface UserType {
+  uuid: string;
   username: string;
   role: "superadmin" | "admin" | "user";
   avatar?: string | File;
   status?: string;
   alias?: string;
-  uuid: string;
   created_at?: Date;
   state?: "banned" | "free";
 }

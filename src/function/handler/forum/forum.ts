@@ -5,6 +5,7 @@ import {
   detailForumType,
   ForumType,
 } from "../../../constant/type/DataType";
+import { signRefresh } from "../auth/auth";
 const urlWithProxy = "/api/vi";
 
 interface ResponseForumType {
@@ -95,6 +96,7 @@ const addForum = async ({
     const res = await axios({
       method: "post",
       url: "/forum",
+      withCredentials: true,
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
@@ -141,11 +143,16 @@ const updateForum = async (formData: FormData, token: AuthTokenType) => {
   } catch (error) {}
 };
 
-const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
+const addComment = async ({
+  comment,
+  forumID,
+  token,
+}: AddCommentProps): Promise<any> => {
   try {
     const res = await axios({
       method: "patch",
       url: "/forum",
+      withCredentials: true,
       headers: {
         Authorization: `Bearer ${token.access_token}`,
       },
@@ -155,8 +162,20 @@ const addComment = async ({ comment, forumID, token }: AddCommentProps) => {
         forumID: forumID,
       },
     });
+
     return res.data;
-  } catch (error) {
+  } catch (error: any) {
+    console.log("errorcomment", error);
+    if (error?.response?.status === 401) {
+      const theToken = JSON.parse(localStorage.getItem("authToken") as any);
+
+      await signRefresh();
+      return addComment({
+        comment,
+        forumID,
+        token: theToken,
+      });
+    }
     throw error;
   }
 };

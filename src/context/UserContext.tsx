@@ -3,6 +3,7 @@ import { useJwt } from "react-jwt";
 import { useLocation } from "react-router-dom";
 import { AuthTokenType, UserType } from "../constant/type/DataType";
 import { useLocalStorage } from "usehooks-ts";
+import { signRefresh } from "../function/handler/auth/auth";
 
 export interface userStateContextProps {
   user: UserType | null;
@@ -24,6 +25,9 @@ const UserProvider: React.FC<any> = ({ children }) => {
     if (!isExpired) {
       setUser(decodedToken as UserType);
     } else {
+      signRefresh()
+        .then((res) => setToken(res.data))
+        .catch(() => setUser(null));
       setUser(null);
     }
   }, [decodedToken, isExpired, token]);

@@ -10,6 +10,7 @@ import { ThemeState } from "../../context/ThemeContext";
 import { BiSun } from "react-icons/bi";
 import MobileNav from "./MobileNav";
 import SearchNav from "../search/SearchNav";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,8 @@ const Navbar = () => {
     "authToken",
     null
   );
+
+  const [cookies, setCookie, removeCookie] = useCookies(["auth-cookie"]);
   const { showSnackbar, showLoading } = systemState();
   const navigate = useNavigate();
 
@@ -30,8 +33,15 @@ const Navbar = () => {
 
   const onLogout = async () => {
     try {
+      console.log("first");
       await signOutFunc(token as AuthTokenType);
+      console.log("second");
       setToken(null);
+      console.log("thired");
+      removeCookie("auth-cookie", {
+        domain: "127.0.0.1",
+        path: "/",
+      });
 
       showSnackbar("SignOut success");
       navigate("/");

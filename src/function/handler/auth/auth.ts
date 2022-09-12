@@ -1,15 +1,15 @@
 import axios from "axios";
-import { AuthTokenType } from "../../../constant/type/DataType";
+import { AuthTokenType, UserType } from "../../../constant/type/DataType";
 // axios.defaults.baseURL = "http://127.0.0.1:3003";
 
-interface SignType {
-  message: string;
+interface IAuthResponse {
+  user: UserType;
   token: AuthTokenType;
 }
 
 const signInFunc = async (username: string, password: string) => {
   try {
-    const res = await axios({
+    const res = await axios.request<IAuthResponse>({
       method: "post",
       url: "/auth/signin",
       data: {
@@ -17,6 +17,7 @@ const signInFunc = async (username: string, password: string) => {
         password,
       },
     });
+    console.log("res", res);
     return res;
   } catch (error: any) {
     throw error.response;
@@ -25,7 +26,7 @@ const signInFunc = async (username: string, password: string) => {
 
 const signUpFunc = async (username: string, password: string) => {
   try {
-    const res = await axios({
+    const res = await axios.request<IAuthResponse>({
       method: "post",
       url: "/auth/signup",
       data: {
@@ -45,34 +46,36 @@ const signOutFunc = async (token: AuthTokenType) => {
     const res = await axios({
       method: "post",
       url: "/auth/signout",
+
       headers: {
         Authorization: `Bearer ${token.access_token}`,
-      },
-      data: {
-        refresh_token: token.refresh_token,
       },
     });
 
     return res;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };
 
-const signRefresh = async (token: AuthTokenType) => {
+const signRefresh = async () => {
   try {
-    const res = await axios.request<SignType>({
+    const res = await axios.request<AuthTokenType>({
       method: "get",
       url: "/auth/refresh",
-      headers: {
-        Authorization: `Bearer ${token.access_token}`,
-      },
-      params: {
-        refresh_token: token.refresh_token,
-      },
+      withCredentials: true,
     });
-    return res.data.token;
-  } catch (error) {}
+
+    const tokenData = JSON.stringify(res.data);
+
+    localStorage.setItem("authToken", tokenData);
+
+    return res;
+  } catch (error) {
+    console.log("errorrefresh", error);
+    throw error;
+  }
 };
 
 export { signInFunc, signOutFunc, signUpFunc, signRefresh };
